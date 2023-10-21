@@ -28,8 +28,8 @@ import javax.sql.DataSource;
 public class ValidateServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static String usermail = "hclis36.5@gmail.com";
-    private static String pass = "01216158022";
+    private static String usermail = "********";
+    private static String pass = "********";
     /**
      * @see HttpServlet#HttpServlet()
      */
