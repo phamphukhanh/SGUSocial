@@ -516,6 +516,50 @@ public class DBUtil {
         }
         return null;
     }
+    
+    public static ArrayList<Comment> getAllComments(DataSource dataSource, String email) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String sql = "select * from comments where email=?";
+            con = (Connection) dataSource.getConnection();
+            Connection con = dataSource.getConnection();
+            if (con != null) {
+                System.out.println("Succeeded");
+            } else {
+                System.out.println("Failed");
+            }
+            ps = con.prepareStatement(sql);
+            ps.setString(3, email);
+//            System.out.println(sql);
+            rs = ps.executeQuery();
+            ArrayList<Comment> comments = new ArrayList<Comment>();
+            while (rs.next()) {
+                Comment comment = new Comment();
+                comment.setId(rs.getString("id"));
+                comment.setPostId(rs.getString("post_id"));
+                comment.setComment(rs.getString("comment"));
+                comment.setEmail(rs.getString("email"));
+
+                comments.add(comment);
+            }
+            return comments;
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+                ps.close();
+                rs.close();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+    
 
     public static ArrayList<Post> getAllPosts(DataSource dataSource, String email) {
         PreparedStatement ps = null;

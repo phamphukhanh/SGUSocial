@@ -52,7 +52,7 @@ opacity: 1.0;
 <title>Finder</title>
 </head>
 <%!
-@Resource(name="jdbc/hello")
+@Resource(name="jdbc/sgusocial")
 private DataSource dataSource;
 %>
 <%
@@ -70,7 +70,7 @@ else{
 %>
 <body>
 <nav class="navbar navbar-dark navbar-expand-md fixed-top bg-primary">
-  <a style="border-radius: 25px;" class="navbar-brand bg-primary text-white" href="home.jsp">PBook</a>
+  <a style="border-radius: 25px;" class="navbar-brand bg-primary text-white" href="home.jsp">SGUSocial</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
