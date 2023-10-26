@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ page import="com.priyam.User,com.priyam.UserDetails,java.util.Date,java.io.File,java.text.SimpleDateFormat,com.priyam.Post,java.util.ArrayList,com.priyam.DBUtil,javax.annotation.Resource,javax.sql.DataSource"%>
+    <%@ page import="com.priyam.User,com.priyam.UserDetails,java.util.Date,java.io.File,java.text.SimpleDateFormat,com.priyam.Post,java.util.ArrayList,com.priyam.DBUtil,jakarta.annotation.Resource,javax.sql.DataSource"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -47,6 +47,9 @@ opacity: 1.0;
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px grey; 
+}
+li.nav-item {
+    padding-right: 30px;
 }
 </style>
 <title>Finder</title>
@@ -100,7 +103,7 @@ else{
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">PBook</h4>
+          <h4 class="modal-title">SGUSocial</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
@@ -118,9 +121,9 @@ else{
     </div>
   </div>
 <div class="container-fluid" style="margin-top:80px">
-<form class="form-inline" action="ServicesServlet" style="width:600px">
-<div class="form-group">
-<input class="form-control mb-2 mr-sm-2" type="text" name="searchitem" required />
+<form class="form-inline" action="ServicesServlet" style="width:600px;display: flex;flex-wrap: nowrap;">
+    <div class="form-group" style="width:100%;">
+<input class="form-control mb-2 mr-sm-2" style="width:100%;" placeholder="Search name..." type="text" name="searchitem" required />
 </div>
 <button type="submit" name="service" value="search" class="btn btn-primary mb-2">Search</button>
 </form>
@@ -128,7 +131,7 @@ else{
 
 <div class="row">
 <div class="col-sm-2"></div>
-<div class="col-sm-8 scrolling">
+<div class="col-sm-8 scrolling" style="background-color: rgba(145, 116, 136, 0.7);">
 
 
 <div class="card-columns">
@@ -147,7 +150,7 @@ if(profiles!=null){
 			else{
 				String path=details.getProf_pic_path();
 				path=path.substring(path.lastIndexOf('/')+1);
-				path=request.getRealPath("")+"images/"+path;
+				path=request.getServletContext().getRealPath("")+"images/"+path;
 				File f=new File(path);
 				if(!f.exists()){
 					details.setProf_pic_path("images/image.png");	
@@ -156,7 +159,7 @@ if(profiles!=null){
 		}
 		%>
 		<a class="card-text text-white"  href= <%= "profile.jsp?email="+curuser.getEmail() %> >
-		  <div class="card bg-primary" style="width:250px;border-radius: 50px;">
+		  <div class="card bg-primary" style="width:200px;border-radius: 50px;">
   <img class="card-img-top" src=<%= (details!=null)?details.getProf_pic_path():"images/image.png" %> alt="Card image" style="width:100%;border-radius: 50px;" >
     <div class="card-body text-center">
 		<%=curuser.getName()%>

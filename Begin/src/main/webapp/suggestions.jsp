@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-     <%@ page import="com.priyam.User,com.priyam.UserDetails,java.io.File,java.util.ArrayList,com.priyam.DBUtil,javax.annotation.Resource,javax.sql.DataSource"%>
+     <%@ page import="com.priyam.User,com.priyam.UserDetails,java.io.File,java.util.ArrayList,com.priyam.DBUtil,jakarta.annotation.Resource,javax.sql.DataSource"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -47,6 +47,10 @@ opacity: 1.0;
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px grey; 
+}
+
+li.nav-item {
+    padding-right: 30px;
 }
 </style>
 <title>Suggestions</title>
@@ -98,7 +102,7 @@ String ver=(String)session.getAttribute("verification");
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">PBook</h4>
+          <h4 class="modal-title">SGUSocial</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
@@ -137,7 +141,7 @@ if(details!=null){
 	else{
 		String path=details.getProf_pic_path();
 		path=path.substring(path.lastIndexOf('/')+1);
-		path=request.getRealPath("")+"images/"+path;
+		path=request.getServletContext().getRealPath("")+"images/"+path;
 		File f=new File(path);
 		if(!f.exists()){
 			details.setProf_pic_path("images/image.png");	

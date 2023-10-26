@@ -25,15 +25,15 @@ public class ChatBean {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public long getTime() {
+	public String getTime() {
 		return time;
 	}
-	public void setTime(long time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 	private int id;
 	private String to;
 	private String from;
 	private String message;
-	private long time;
+	private String time;
 }

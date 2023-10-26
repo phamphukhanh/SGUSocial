@@ -13,6 +13,10 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
         <style>
+            
+            li.nav-item {
+                padding-right: 30px;
+            }
             nav{
                 opacity: 0.85;
             }
@@ -147,9 +151,11 @@
         </div>
     </div>
     <div class="container-fluid" style="margin-top:80px">
-        <div class="card" style="opacity:1.0;width:250px;border-radius: 50px;" >
-            <img class="card-img-top" src="<%= (details != null)?details.getProf_pic_path():"images/image.png" %>" alt="Card image" style="width:100%;border-radius: 50px;" >
-            <div class="card-body">
+        <div class="card" style="opacity:1.0;border-radius: 50px;display: flex;flex-direction: row;align-items: center;" >
+            <div class="card-img">
+                    <img class="card-img-top" src="<%= (details != null)?details.getProf_pic_path():"images/image.png" %>" alt="Card image" style="width:100%;border-radius: 50px;" >
+            </div>
+            <div class="card-body" style="width:100%;">
                 <div class="card-title">
                     <h5>Name: <%= profile.getName() %></h5>
                 </div>
@@ -234,14 +240,14 @@
     </div>
 </div>
 </div>
-<div class="row">
+<div class="row" style="display: grid;place-items: center;">
     <div class="col-sm-6">
         <div class="container-fluid card collup" style="opacity:0.9;border-radius: 30px;">
             <div class="card-body">
                 <form action="ServicesServlet">
                     <div class="form-group">
                         <h5><label for="message">Post something:</label></h5>
-                        <textarea name="message" class="form-control" rows="5" id="comment" required></textarea>
+                        <textarea name="message" placeholder="How you feel to day" class="form-control" rows="5" id="comment" required></textarea>
                     </div>
                     <input type="hidden" name="page" value="profile" />
                     <button style="border-radius: 50px;" type="submit" name="service" value="Post" class="btn btn-primary">Submit</button>
@@ -275,7 +281,7 @@
     %>
     <div class="card collup" style="border-radius: 30px;">
         <div class="card-header">
-            <div class="row">
+            <div class="row" >
                 <div class="col-sm-1" align="left">
                     <img src= <%= (details!=null)?details.getProf_pic_path():"images/image.png" %> class="rounded-circle" alt="Profile pic" width="25" height="25" >
                 </div>

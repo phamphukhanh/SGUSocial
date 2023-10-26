@@ -45,7 +45,7 @@ public class Post implements Comparable<Object>{
 	private int likes;
 	private String message;
 	private Date date;
-	private long time;
+	private String time;
 	private ArrayList<String> likers;
 
 	public ArrayList<String> getLikers() {
@@ -54,10 +54,10 @@ public class Post implements Comparable<Object>{
 	public void setLikers(ArrayList<String> likers) {
 		this.likers = likers;
 	}
-	public long getTime() {
+	public String getTime() {
 		return time;
 	}
-	public void setTime(long time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 	private boolean active;
@@ -72,15 +72,16 @@ public class Post implements Comparable<Object>{
 		else if(date.before(d)){
 			return 1;
 		}
-		else{
-			long t=p.getTime();
-			if(time>t){
-				return -1;
-			}
-			else if(time<t){
-				return 1;
-			}
-			else return 0;
-		}
+//		else{
+//			String t=p.getTime();
+//			if(time>t){
+//				return -1;
+//			}
+//			else if(time<t){
+//				return 1;
+//			}
+//			else return 0;
+//		}
+            return 0;
 	}
 }

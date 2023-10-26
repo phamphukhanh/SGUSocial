@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ page import="com.priyam.User,com.priyam.ChatBean,com.priyam.UserDetails,java.io.File,java.util.ArrayList,com.priyam.DBUtil,javax.annotation.Resource,javax.sql.DataSource"%>
+    <%@ page import="com.priyam.User,com.priyam.ChatBean,com.priyam.UserDetails,java.io.File,java.util.ArrayList,com.priyam.DBUtil,jakarta.annotation.Resource,javax.sql.DataSource"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -52,6 +52,10 @@ opacity: 1.0;
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px grey; 
+}
+
+li.nav-item {
+    padding-right: 30px;
 }
 </style>
 </head>
@@ -135,18 +139,17 @@ for(int i=0;i<chats.size();i++){
 	ChatBean chat=chats.get(i);
 	%>
 
-	<div class="row">
+        <div class="row" style="display:block;background-color: rgb(140 140 123);">
 	<%
 	if(chat.getFrom().equals(user.getEmail())){
 		%>
-		<div class="col-sm"></div>
-		<div class="col-sm"></div>
+		<div class="col-sm"><%= chat.getFrom() %></div>
 		<div class="col-sm">
 			<div class="card bg-dark text-white" style="margin-bottom:10px;border-radius: 50px;">
 	<div class="card-body">
 		<div class="card-text"><%= chat.getMessage() %></div>
 		</div>
-			</div>
+			</div><div class="col-sm"><%= chat.getTime() %></div>
 	</div>
 	<%}
 	else{%>
@@ -169,13 +172,13 @@ for(int i=0;i<chats.size();i++){
 </div>
 <div class="card-footer">
 <div class="row">
-<div class="col-sm-9"></div>
-<div class="col-sm-3">
-<form class="form-inline" action="ServicesServlet" method="post">
-<div class="row">
+<!--<div class="col-sm-9"></div>
+<div class="col-sm-3">-->
+<form class="form-inline" action="ServicesServlet" method="post" style="width:100%;">
+    <div class="row" style="width: 100%;">
 <div class="col-sm">
 <div class="form-group">
-  <textarea style="border-radius: 25px;" name="message" class="form-control" rows="2" id="comment" placeholder="Type here..." required></textarea>
+  <textarea style="border-radius: 25px;width: 100%;" name="message" class="form-control" rows="2" id="comment" placeholder="Type here..." required></textarea>
 </div>
 </div>
 <input type="hidden" name="dest" value=<%= profile.getEmail() %> >

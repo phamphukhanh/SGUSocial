@@ -17,6 +17,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.OutputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Servlet implementation class ServicesServlet
@@ -56,6 +58,11 @@ public class ServicesServlet extends HttpServlet {
                 response.sendRedirect("profile.jsp?email=" + request.getParameter("email2"));
             }
         } else if (request.getParameter("service").equals("Post")) {
+            LocalDateTime currentDateTime = LocalDateTime.now();
+            // Định dạng thời gian theo "HH:mm:ss"
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            // Chuyển đổi thành chuỗi theo định dạng "HH:mm:ss"
+            String formattedTime = currentDateTime.format(formatter);
             ArrayList values = new ArrayList();
             User user = (User) request.getSession().getAttribute("user");
             values.add(1);
@@ -63,7 +70,7 @@ public class ServicesServlet extends HttpServlet {
             values.add(0);
             values.add(request.getParameter("message"));
             values.add(new java.util.Date());
-            values.add((Long) System.currentTimeMillis() / 1000);
+            values.add(formattedTime);
             values.add(true);
             if (DBUtil.insertRow(dataSource, "post", values, 1)) {
                 if (request.getParameter("page").equals("home")) {
@@ -73,7 +80,20 @@ public class ServicesServlet extends HttpServlet {
                 }
 
             }
-        } else if (request.getParameter("service").equals("Like")) {
+        }else if (request.getParameter("service").equals("Comments")) {
+            ArrayList values = new ArrayList();
+            User user = (User) request.getSession().getAttribute("user");
+            values.add(1);
+            values.add(request.getParameter("dest"));
+            values.add(user.getEmail());
+            values.add(request.getParameter("comment"));
+            if (DBUtil.insertRow(dataSource, "comments", values, 1)) {
+                if (request.getParameter("page").equals("home")) {
+                    response.sendRedirect("home.jsp");
+                } else if (request.getParameter("page").equals("profile")) {
+                    response.sendRedirect("profile.jsp?email=" + user.getEmail());
+                }}
+    } else if (request.getParameter("service").equals("Like")) {
             User user = (User) request.getSession().getAttribute("user");
             ArrayList values = new ArrayList();
             values.add(Integer.parseInt(request.getParameter("id")));
@@ -159,13 +179,18 @@ public class ServicesServlet extends HttpServlet {
             DBUtil.updateUserDetails2(dataSource, request.getParameter("email"), about, path);
             response.sendRedirect("profile.jsp?email=" + request.getParameter("email"));
         } else if (request.getParameter("service").equals("Chat")) {
+            LocalDateTime currentDateTime = LocalDateTime.now();
+            // Định dạng thời gian theo "HH:mm:ss"
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            // Chuyển đổi thành chuỗi theo định dạng "HH:mm:ss"
+            String formattedTime = currentDateTime.format(formatter);
             ArrayList values = new ArrayList();
             User user = (User) request.getSession().getAttribute("user");
             values.add(1);
             values.add(user.getEmail());
             values.add(request.getParameter("dest"));
             values.add(request.getParameter("message"));
-            values.add((Long) System.currentTimeMillis() / 1000);
+            values.add(formattedTime);
             if (DBUtil.insertRow(dataSource, "chat", values, 1)) {
                 response.sendRedirect("chat.jsp?email=" + request.getParameter("dest"));
             }

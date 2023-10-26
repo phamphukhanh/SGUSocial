@@ -77,6 +77,9 @@
                 height: 50px;
                 overflow: auto;
             }
+            li.nav-item {
+                padding-right: 30px;
+            }
         </style>
         <title>Home</title>
     </head>
@@ -91,7 +94,6 @@
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         %>
         <%
-//        Comment comment = (Comment)session.getAttribute("comments");
         User user = (User)session.getAttribute("user");
         String ver=(String)session.getAttribute("verification");
         String name=null;
@@ -158,7 +160,7 @@
                         <form action="ServicesServlet">
                             <div class="form-group">
                                 <h4><label for="message">Post something:</label></h4>
-                                <textarea name="message" class="form-control" rows="5" id="comment" required></textarea>
+                                <textarea placeholder="How you feel today..." name="message" class="form-control" rows="5" id="comment" required></textarea>
                             </div>
                             <input type="hidden" name="page" value="home" />
                             <button style="border-radius: 50px;" type="submit" name="service" value="Post" class="btn btn-primary">Submit</button>
@@ -172,16 +174,20 @@
         <div class="container-fluid collup" >
             <h4 class="text-white" >Feeds :</h4>
             <div class="scrolling" >
-                <%
+                <%                
                 ArrayList<Post> posts=DBUtil.getAllPosts(dataSource, user.getEmail());
-//                ArrayList<Comment> comments=DBUtil.getAllComments(dataSource, user.getEmail());
+               ArrayList<Comment> commentList = new ArrayList<Comment>();
+//                ArrayList<Post> postid=DBUtil.getAllPostById(dataSource); 
                 if(posts!=null){
                 for(int i=0;i<posts.size();i++){
                         Post curpost=posts.get(i);
+                        
+                        ArrayList<Comment> comments=DBUtil.getAllComments(dataSource, curpost.getId());
                         User curuser=DBUtil.getUserDetails(dataSource, curpost.getEmail());
                         boolean isLiked=DBUtil.isLiked(dataSource, curpost.getId(), user.getEmail());
                         String format=new SimpleDateFormat("dd-MM-yyyy").format(curpost.getDate());
                         String liking=(isLiked)?"Unlike":"Like";
+                        String time = curpost.getTime();
                         UserDetails details=DBUtil.getUserDetails2(dataSource, curuser.getEmail());
                         if(details!=null){
                                 //System.out.println(details.getProf_pic_path());
@@ -207,37 +213,6 @@
                         }
                         
                         
-//                        ArrayList<Comment> comment=DBUtil.getComments(dataSource, comment.getpostId());
-//                        if(posts!=null){
-//                        for(int i=0;i<posts.size();i++){
-//                                Post curpost=posts.get(i);
-//                                User curuser=DBUtil.getUserDetails(dataSource, curpost.getEmail());
-//                                boolean isLiked=DBUtil.isLiked(dataSource, curpost.getId(), user.getEmail());
-//                                String format=new SimpleDateFormat("dd-MM-yyyy").format(curpost.getDate());
-//                                String liking=(isLiked)?"Unlike":"Like";
-//                                UserDetails details=DBUtil.getUserDetails2(dataSource, curuser.getEmail());
-//                                if(details!=null){
-//                                        //System.out.println(details.getProf_pic_path());
-//                                        if(details.getProf_pic_path()==null){
-//                                                details.setProf_pic_path("images/image.png");
-//                                        }
-//                                        else{
-//                                                String path=details.getProf_pic_path();
-//                                                path=path.substring(path.lastIndexOf('/')+1);
-//                                                path = request.getServletContext().getRealPath("")+"images/"+path;
-//                                                File f=new File(path);
-//                                                if(!f.exists()){
-//                                                        details.setProf_pic_path("images/image.png");	
-//                                                }
-//                                        }
-//                                }
-//                                ArrayList<String> likers=curpost.getLikers();
-//                                ArrayList<User> users=new ArrayList<User>();
-//                                ArrayList<UserDetails> usersdetails=new ArrayList<UserDetails>();
-//                                for(String u: likers){
-//                                        users.add(DBUtil.getUserDetails(dataSource, u));
-//                                        usersdetails.add(DBUtil.getUserDetails2(dataSource, u));
-//                                }}}
                 %>
                 <div class="card collup" style="border-radius: 30px;">
                     <div class="card-header">
@@ -250,6 +225,7 @@
                             </div>
                             <div class="col-sm-9" align="right">
                                 <h6>Date: <%= format%></h6>
+                                <h6>Time <%= time%></h6>
                             </div>
                         </div>
                     </div>
@@ -269,8 +245,9 @@
                                     <h6 style="display:flex"><button style="border-radius: 50px;" type="submit" name="service" value="<%= liking %>" class="btn btn-primary"><%= liking %>  <i class="fas fa-thumbs-up"></i></button>
                                     <span style="border-radius: 50px;line-height: 40px;cursor: pointer;" class="badge badge-dark btn " data-toggle="modal" data-target=<%= "#postLikes"+i %> > <%=curpost.getLikes()%> likes </span></h6>
                                     <div style="display:flex;" class="enterComment">
-                                        <input  type="text" placeholder="Please enter your comments"> 
-                                        <button style="flex:1;" type="button" class="btn">Submit</button>
+                                        <input type="hidden" name="dest" value=<%= curpost.getId() %> >
+                                        <input  type="text" name="comment" placeholder="Please enter your comments"> 
+                                        <button style="flex:1;" type="submit" name="service" value="Comments" class="btn">Submit</button>
                                     </div>
                                     <button style="font-size: 15px;" type="button" class="btn btn-primary badge badge-dark btn" data-toggle="modal" data-target="#staticBackdrop"><span style="border-radius: 50px;" class="badge badge-dark btn " data-toggle="modal" data-target=<%= "#postLikes"+i %> > <%=curpost.getLikes()%> </span>Comments</button>
                                     
@@ -293,7 +270,7 @@
 
                         </div>
                     </div></div>
-                    <!-- Modal -->
+                    <!-- Modal Comment-->
                 <div class="modal fade" id="staticBackdrop" style="opacity: 1.0;">
                   <div class="modal-dialog">
                     <div class="modal-content">
@@ -302,7 +279,38 @@
                         <button style="width: 10%;" type="button" class="close" data-dismiss="modal" >&times;</button>
                       </div>
                         <div style="overflow: auto;" class="modal-body scroll">
-                            <i></i>
+                            <%
+                                    if (comments != null && !comments.isEmpty()) {
+                                        for(int c=0;c<comments.size();c++){
+                                            Comment cm=comments.get(c);
+                                            commentList.add(cm);
+                                          }
+                                    } else {
+                                            Comment emptyComment = new Comment();
+//                                            emptyComment.setPostId("");
+                                            emptyComment.setEmail("");
+                                            emptyComment.setComment("No Comments");
+                                            commentList.add(emptyComment);
+                                    }
+//                                    Comment comment : commentList
+                                    for (Comment comment : commentList) {
+                                        if(!"No Comments".equals(comment.getComment())) {
+                                        
+                            %>
+                             
+                                        <p><%= comment.getEmail() %></p>
+                                        <p><%= comment.getComment() %></p>                              
+                            
+                                <%
+                                        } else {
+                                %>
+                                
+                                        <i><%= comment.getComment() %></i>
+                                        
+                            <%
+                                        }
+                                }
+                            %>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-primary close" data-dismiss="modal">Close</button>

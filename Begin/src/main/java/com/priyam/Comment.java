@@ -1,17 +1,17 @@
 package com.priyam;
 
 public class Comment {
-    private String id;
+    private int id;
     private String postId;
     private String email;
     private String comment;
 
     // Getter và Setter cho các trường
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -482,7 +482,7 @@ public class DBUtil {
                 post.setLikes(rs.getInt("likes"));
                 post.setMessage(rs.getString("message"));
                 post.setDate(new java.util.Date(rs.getDate("postdate").getTime()));
-                post.setTime(rs.getLong("time"));
+                post.setTime(rs.getString("time"));
                 post.setActive(rs.getBoolean("active"));
 
                 sql = "select email from liked where id=?";
@@ -517,11 +517,11 @@ public class DBUtil {
         return null;
     }
     
-    public static ArrayList<Comment> getAllComments(DataSource dataSource, String email) {
+    public static ArrayList<Comment> getAllComments(DataSource dataSource, int postId) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            String sql = "select * from comments where email=?";
+            String sql = "SELECT comments.post_id,comments.email,comments.comment FROM post, comments WHERE post.id = comments.post_id and post.id = ?";
             con = (Connection) dataSource.getConnection();
             Connection con = dataSource.getConnection();
             if (con != null) {
@@ -530,17 +530,16 @@ public class DBUtil {
                 System.out.println("Failed");
             }
             ps = con.prepareStatement(sql);
-            ps.setString(3, email);
+            ps.setInt(1, postId);
 //            System.out.println(sql);
             rs = ps.executeQuery();
             ArrayList<Comment> comments = new ArrayList<Comment>();
             while (rs.next()) {
                 Comment comment = new Comment();
-                comment.setId(rs.getString("id"));
+//                comment.setId(rs.getInt("id"));
                 comment.setPostId(rs.getString("post_id"));
-                comment.setComment(rs.getString("comment"));
                 comment.setEmail(rs.getString("email"));
-
+                comment.setComment(rs.getString("comment"));
                 comments.add(comment);
             }
             return comments;
@@ -560,6 +559,49 @@ public class DBUtil {
         return null;
     }
     
+//        public static ArrayList<Post> getAllPostById(DataSource dataSource) {
+//        PreparedStatement ps = null;
+//        ResultSet rs = null;
+//        try {
+//            String sql = "SELECT * FROM `post` WHERE id";
+//            con = (Connection) dataSource.getConnection();
+//            Connection con = dataSource.getConnection();
+//            if (con != null) {
+//                System.out.println("Succeeded");
+//            } else {
+//                System.out.println("Failed");
+//            }
+//            ps = con.prepareStatement(sql);
+////            System.out.println(sql);
+//            rs = ps.executeQuery();
+//            ArrayList<Post> postLists = new ArrayList<Post>();
+//            while (rs.next()) {
+//                Post postList = new Post();
+//                postList.setId(rs.getInt("id"));
+//                postList.setEmail(rs.getString("email"));
+//                postList.setLikes(rs.getInt("likes"));
+//                postList.setMessage(rs.getString("message"));
+//                postList.setDate(new java.util.Date(rs.getDate("postdate").getTime()));
+//                postList.setTime(rs.getLong("time"));
+//                postList.setActive(rs.getBoolean("active"));
+//                postLists.add(postList);
+//            }
+//            return postLists;
+//        } catch (Exception e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                con.close();
+//                ps.close();
+//                rs.close();
+//            } catch (SQLException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }
+//        }
+//        return null;
+//    }
 
     public static ArrayList<Post> getAllPosts(DataSource dataSource, String email) {
         PreparedStatement ps = null;
@@ -587,7 +629,7 @@ public class DBUtil {
                 post.setLikes(rs.getInt("likes"));
                 post.setMessage(rs.getString("message"));
                 post.setDate(new java.util.Date(rs.getDate("postdate").getTime()));
-                post.setTime(rs.getLong("time"));
+                post.setTime(rs.getString("time"));
                 post.setActive(rs.getBoolean("active"));
 
                 sql = "select email from liked where id=?";
@@ -639,7 +681,7 @@ public class DBUtil {
                 chat.setFrom(rs.getString("email1"));
                 chat.setTo(rs.getString("email2"));
                 chat.setMessage(rs.getString("message"));
-                chat.setTime(rs.getLong("timing"));
+                chat.setTime(rs.getString("timing"));
                 chats.add(chat);
             }
             return chats;
