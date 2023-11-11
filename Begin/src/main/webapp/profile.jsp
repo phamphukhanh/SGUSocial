@@ -267,7 +267,9 @@
     ArrayList<Post> posts=DBUtil.getUserPosts(dataSource, profile.getEmail());
     for(int i=0;i<posts.size();i++){
             Post curpost=posts.get(i);
+            ArrayList<Comment> commentList = new ArrayList<Comment>();
             ArrayList<Comment> comments=DBUtil.getAllComments(dataSource, curpost.getId());
+            int totalComments = comments.size();
             User curuser=DBUtil.getUserDetails(dataSource, curpost.getEmail());
             boolean isLiked=DBUtil.isLiked(dataSource, curpost.getId(), user.getEmail());
             String format=new SimpleDateFormat("dd-MM-yyyy").format(curpost.getDate());
@@ -312,12 +314,35 @@
                         </h6>
                         <div class="formComment" style="background-color: darkgray;width: 85em;height: 5em;overflow: auto;">
                             <div class="formCm" style="background-color: darkseagreen;border: 2px solid darkslategray;padding: 0.5em;margin-bottom: 5px;">
+                                <%
+                                       int commentCount = 0;
+                                       if (comments != null && !comments.isEmpty()) {
+                                           System.out.println("Comments size 286 :   " +comments.size());
+                                           for(int c=0;c<comments.size();c++){
+                                               Comment cm=comments.get(c);
+                                               commentList.add(cm);
+                                             }
+                                       } else {
+                                               Comment emptyComment = new Comment();
+   //                                            emptyComment.setPostId("");
+                                               emptyComment.setComment("No Comments");
+                                               commentList.add(emptyComment);
+                                       }
+                                       if(commentList!=null) {
+                                                for (Comment comment : commentList) {
+                                %>
                                 <div class="formPicProfile">
-                                    <h6 style="color: chocolate;">ABC</h6>
+                                    <h6 style="color: chocolate;"><i><%= comment.getEmail() %></i></h6>
                                 </div>
                                 <div class="Comments">
-                                    <p>HELLO AE</p>
+                                    <p><%= comment.getComment() %></p>
                                 </div>
+                                
+                                    <%
+                                        }
+                                    }
+                                    %>
+                                
                             </div>
                             
                         </div>
