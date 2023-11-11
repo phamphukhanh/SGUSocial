@@ -21,7 +21,7 @@
                 overflow-y: auto;
             }
             body {
-                background-image: url("images/bg.jpg");
+                background-image: url("images/background.jpg");
                 background-size: cover;
             }
             nav{
@@ -77,9 +77,6 @@
                 height: 50px;
                 overflow: auto;
             }
-            li.nav-item {
-                padding-right: 30px;
-            }
         </style>
         <title>Home</title>
     </head>
@@ -111,19 +108,34 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a style="border-radius: 25px;" class="nav-link fas fa-home btn btn-primary" href=<%= "home.jsp?" %>>Home</a>
+                    <a style="border-radius: 10px;" class="nav-link btn btn-primary" href=<%= "home.jsp?" %>>
+                        <i class="fas fa-home"></i>
+                        Home
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a style="border-radius: 25px;" class="nav-link fas fa-user-circle btn btn-primary" href=<%= "profile.jsp?email="+user.getEmail() %>> Profile</a>
+                    <a style="border-radius: 10px;" class="nav-link btn btn-primary" href=<%= "profile.jsp?email="+user.getEmail() %>>
+                        <i class="fas fa-user-circle"></i>
+                        Profile
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a style="border-radius: 25px;" class="nav-link fas fa-search btn btn-primary" href="finder.jsp"> Finder</a>
+                    <a style="border-radius: 10px;" class="nav-link btn btn-primary" href="finder.jsp">
+                        <i class="fas fa-search"></i>
+                        Finder
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a style="border-radius: 25px;" class="nav-link fas fa-user-friends btn btn-primary" href="suggestions.jsp"> Suggestions</a>
+                    <a style="border-radius: 10px;" class="nav-link btn btn-primary" href="suggestions.jsp">
+                        <i class="fas fa-user-friends"></i>
+                        Suggestions
+                    </a>
                 </li>    
                 <li class="nav-item">
-                    <a style="border-radius: 25px;" class="nav-link fas fa-power-off btn btn-primary" data-toggle="modal" data-target="#myModal" href="#">Logout</a>
+                    <a style="border-radius: 10px;" class="nav-link btn btn-primary" data-toggle="modal" data-target="#myModal" href="#">
+                        <i class="fas fa-power-off"></i>
+                        Logout
+                    </a>
                 </li>
             </ul>
         </div>  
@@ -145,7 +157,7 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <a style="border-radius: 25px;" class="text-white btn btn-danger" href=<%= "ValidateServlet?validate=logout" %>  >Logout</a>
+                    <a style="border-radius: 10px;" class="text-white btn btn-danger" href=<%= "ValidateServlet?validate=logout" %>  >Logout</a>
                 </div>
 
             </div>
@@ -181,7 +193,7 @@
                 if(posts!=null){
                 for(int i=0;i<posts.size();i++){
                         Post curpost=posts.get(i);
-                        System.out.println("Post ID: "+curpost.getId());
+//                        System.out.println("Post ID: "+curpost.getId());
                         ArrayList<Comment> commentList = new ArrayList<Comment>();
                         ArrayList<Comment> comments=DBUtil.getAllComments(dataSource, curpost.getId());
                         int totalComments = comments.size();
@@ -284,14 +296,14 @@
                                 <%
                                        int commentCount = 0;
                                        if (comments != null && !comments.isEmpty()) {
-                                           System.out.println("Comments size 286 :   " +comments.size());
+//                                           System.out.println("Comments size 286 :   " +comments.size());
                                            for(int c=0;c<comments.size();c++){
                                                Comment cm=comments.get(c);
                                                commentList.add(cm);
                                              }
                                        } else {
                                                Comment emptyComment = new Comment();
-   //                                            emptyComment.setPostId("");
+//                                             emptyComment.setPostId("");
                                                emptyComment.setComment("No Comments");
                                                commentList.add(emptyComment);
                                        }
@@ -299,14 +311,14 @@
                                 <div class="formComment" style="background-color: darkgray;width: 29.5em;height:9.5em;overflow: auto;">
                                     <div class="formCm" style="background-color: darkseagreen;border: 2px solid darkslategray;padding: 0.5em;margin-bottom: 5px;">
                                         <%  
-                                            System.out.println("Commentlist: "+commentList);
+//                                            System.out.println("Commentlist: "+commentList);
                                                     if(commentList!=null) {
                                                     for (Comment comment : commentList) {
                                                         String commentValue = comment.getComment();
-                                                                System.out.println("ToTal Comments " +totalComments);
-                                                                System.out.println("CM Email "+comment.getEmail());
-                                                                System.out.println("Comment Value "+commentValue);
-                                                                System.out.println("Post id of Comments: "+comment.getPostId());
+//                                                                System.out.println("ToTal Comments " +totalComments);
+//                                                                System.out.println("CM Email "+comment.getEmail());
+//                                                                System.out.println("Comment Value "+commentValue);
+//                                                                System.out.println("Post id of Comments: "+comment.getPostId());
                                                         
                                 
                                         %>

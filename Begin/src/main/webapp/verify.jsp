@@ -16,7 +16,7 @@
                 margin: 20px;
             }
             body {
-                background-image: url("images/bg.jpg");
+                background-image: url("images/background.jpg");
                 background-size: cover;
             }
             div form {
@@ -47,7 +47,7 @@
                         <input type="text" name="otp" class="form-control mb-2 mr-sm-2" id="otp" required >
                         <input type="hidden" name="page" value= <%= request.getAttribute("page") %> >
                         <input type="hidden" name="email" value= <%= user.getEmail() %> >
-                        <button type="submit" name="validate" value="verify" class="btn btn-primary mb-2">Submit</button>
+                        <button type="submit" name="validate" value="verify" class="btn btn-secondary mb-2">Submit</button>
                     </form>
                 </div>
                 <div class="col-sm-3"></div>

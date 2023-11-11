@@ -524,12 +524,11 @@ public class DBUtil {
             String sql = "SELECT comments.* FROM post, comments WHERE post.id = comments.post_id and post.id = ?";
             con = (Connection) dataSource.getConnection();
             Connection con = dataSource.getConnection();
-            if (con != null) {
-                System.out.println("Succeeded");
-            } else {
-                System.out.println("Failed");
-            }
-            System.out.println("Comment sql: " + sql);
+//            if (con != null) {
+//                System.out.println("Database successfully connected!");
+//            } else {
+//                System.out.println("Database failed to connect!");
+//            }
             
             ps = con.prepareStatement(sql);
             ps.setInt(1, postId);
@@ -570,11 +569,11 @@ public class DBUtil {
             String sql = "select * from post where email=? or email in (select email2 from follow where email1=?) order by postdate desc,time desc;";
             con = (Connection) dataSource.getConnection();
             Connection con = dataSource.getConnection();
-            if (con != null) {
-                System.out.println("Succeeded");
-            } else {
-                System.out.println("Failed");
-            }
+//            if (con != null) {
+//                System.out.println("Database successfully connected!");
+//            } else {
+//                System.out.println("Database failed to connect!");
+//            }
             ps = con.prepareStatement(sql);
             ps.setString(1, email);
             ps.setString(2, email);

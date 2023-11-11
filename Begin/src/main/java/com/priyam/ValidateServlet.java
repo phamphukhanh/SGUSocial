@@ -112,7 +112,7 @@ public class ValidateServlet extends HttpServlet {
             User user = DBUtil.getUserLogin((javax.sql.DataSource) dataSource, request.getParameter("email"), request.getParameter("password"));
             if (user != null) {
                 String otp = generateOTP();
-                System.out.println("OTP:" + otp);
+                System.out.println("OTP: " + otp);
                 HttpSession session = request.getSession();
                 session.setAttribute("verification", "n");
                 session.setAttribute("otp", otp);
@@ -133,7 +133,7 @@ public class ValidateServlet extends HttpServlet {
             session.setAttribute("user", user);
             session.setAttribute("pass", request.getParameter("password"));
             String otp = generateOTP();
-            System.out.println("OTP:" + otp);
+            System.out.println("OTP: " + otp);
             session.setAttribute("verification", "n");
             session.setAttribute("otp", otp);
             request.setAttribute("page", "registration");
