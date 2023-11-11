@@ -71,9 +71,11 @@ public class ValidateServlet extends HttpServlet {
                     ArrayList values = new ArrayList();
                     values.add(user.getEmail());
                     values.add(user.getName());
-                    System.out.println(user.getEmail());
+//                    System.out.println(user.getEmail());
                     values.add(session.getAttribute("pass"));
                     values.add(true);
+                    
+                    
                     ArrayList values1 = new ArrayList();
                     values1.add(user.getEmail());
                     values1.add(null);
@@ -90,14 +92,14 @@ public class ValidateServlet extends HttpServlet {
                     postValues.add(1);
                     postValues.add(user.getEmail());
                     postValues.add(0);
-                    postValues.add("Your first post is here! This post is automatically created when you create your acount for the first time, you can delete it if you want");
+                    postValues.add("Your first post is here! This post is automatically created when you create your account for the first time.");
                     postValues.add(new java.util.Date());
-                    values.add(formattedTime);
+                    postValues.add(formattedTime);
                     postValues.add(true);
 
                     if (DBUtil.insertRow(dataSource, "user", values, 0)
                             && DBUtil.insertRow(dataSource, "user_details", values1, 0)
-                            && DBUtil.insertRow(dataSource, "post", postValues, 0)) {
+                            && DBUtil.insertRow(dataSource, "post", postValues, 1)) {
                         response.sendRedirect("home.jsp");
                     } else {
                         DBUtil.deleteUser((javax.sql.DataSource) dataSource, request.getParameter("email"));

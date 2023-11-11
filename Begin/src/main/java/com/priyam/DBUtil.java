@@ -67,7 +67,8 @@ public class DBUtil {
                     }
                 }
             }
-            System.out.println(sql);
+//            System.out.println(sql);
+            System.out.println(ps);
             if (ps.executeUpdate() > 0) {
                 return true;
             }
