@@ -13,10 +13,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
         <style>
-            
-            li.nav-item {
-                padding-right: 30px;
-            }
             nav{
                 opacity: 0.85;
             }
@@ -31,7 +27,7 @@
                 margin-left: -4em;
             }
             body {
-                background-image: url("images/bg.jpg");
+                background-image: url("images/background.jpg");
                 background-size: cover;
             }
             div.card {
@@ -152,27 +148,29 @@
         </div>
     </div>
     <div class="container-fluid" style="margin-top:80px">
-        <div class="card" style="opacity:1.0;border-radius: 50px;display: flex;flex-direction: row;align-items: center;" >
+        <div class="card mx-auto" style="opacity:1.0;border-radius: 50px;display: flex;flex-direction: row;align-items: center;" >
             <div class="card-img">
-                    <img class="card-img-top" src="<%= (details != null)?details.getProf_pic_path():"images/image.png" %>" alt="Card image" style="width:100%;border-radius: 50px;" >
+                    <img class="card-img-top" src="<%= (details != null)?details.getProf_pic_path():"images/student.png" %>" alt="Card image" style="width:100%;border-radius: 50px;" >
             </div>
             <div class="card-body" style="width:100%;">
-                <div class="card-title">
-                    <h5>Name: <%= profile.getName() %></h5>
-                </div>
-                <div class="card-title">
-                    <h6><i>Email: <%= profile.getEmail() %></i></h6>
-                </div>
-                <div class="card-title">
-                    <h6><i>Short bio: <%= (details != null)?details.getAbout():"" %></i></h6>
-                </div>
-                <div class="row" >
-                    <div class="col-sm">
-                        <a class="card-link" href=<%= "followers.jsp?email="+profile.getEmail()%> >Followers</a>
-                    </div>
-                    <div class="col-sm">
-                        <a class="card-link" href=<%= "following.jsp?email="+profile.getEmail()%> >Following</a> 
-                    </div>
+                <img class="card-img-top" src="<%= (details != null)?details.getProf_pic_path():"images/student.png" %>" alt="Card image" style="width:100%;border-radius: 50px;" >
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h5>Name: <%= profile.getName() %></h5>
+                        </div>
+                        <div class="card-title">
+                            <h6><i>Email: <%= profile.getEmail() %></i></h6>
+                        </div>
+                        <div class="card-title">
+                            <h6><i>Short bio: <%= (details!=null)?details.getAbout():"" %></i></h6>
+                        </div>
+                        <div class="row text-center d-flex align-items-center">
+                            <div class="col-sm">
+                                <a class="card-link" href=<%= "followers.jsp?email="+profile.getEmail()%> >Followers</a>
+                            </div>
+                            <div class="col-sm">
+                                <a class="card-link" href=<%= "following.jsp?email="+profile.getEmail()%> >Following</a> 
+                            </div>
                     <% if(user != null && user.getEmail().equals(profile.getEmail())){ 
                     %>
                     <!-- Button to Open the Modal -->
