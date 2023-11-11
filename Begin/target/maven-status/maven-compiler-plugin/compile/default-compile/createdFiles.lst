@@ -1,12 +1,10 @@
 com\priyam\Comment.class
-com\priyam\Sms.class
 com\priyam\ChatBean.class
-com\priyam\User.class
-com\priyam\DBUtil.class
-com\priyam\UserDetails.class
-com\priyam\ServicesServlet.class
 com\mycompany\begin\JakartaRestConfiguration.class
 com\mycompany\begin\resources\JakartaEE10Resource.class
 com\priyam\ValidateServlet.class
 com\priyam\Post.class
-com\priyam\ValidateServlet$1.class
+com\priyam\User.class
+com\priyam\DBUtil.class
+com\priyam\UserDetails.class
+com\priyam\ServicesServlet.class

@@ -87,9 +87,10 @@ public class ValidateServlet extends HttpServlet {
                     postValues.add((Long) System.currentTimeMillis() / 1000);
                     postValues.add(true);
 
-                    if (DBUtil.insertRow((javax.sql.DataSource) dataSource, "user", values, 0)
-                            && DBUtil.insertRow((javax.sql.DataSource) dataSource, "user_details", values1, 0)
-                            && DBUtil.insertRow(dataSource, "post", postValues, 1)) {
+                    if (DBUtil.insertRow(dataSource, "user", values, 0) && 
+                        DBUtil.insertRow(dataSource, "user_details", values1, 0) &&
+                        DBUtil.insertRow(dataSource, "post", postValues, 1) 
+                        ) {
                         response.sendRedirect("home.jsp");
                     } else {
                         DBUtil.deleteUser((javax.sql.DataSource) dataSource, request.getParameter("email"));
