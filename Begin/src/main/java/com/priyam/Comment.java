@@ -2,9 +2,11 @@ package com.priyam;
 
 public class Comment {
     private int id;
-    private String postId;
+    private int postId;
     private String email;
     private String comment;
+    private String time;
+
 
     // Getter và Setter cho các trường
     public int getId() {
@@ -15,11 +17,11 @@ public class Comment {
         this.id = id;
     }
 
-    public String getPostId() {
+    public int getPostId() {
         return postId;
     }
 
-    public void setPostId(String postId) {
+    public void setPostId(int postId) {
         this.postId = postId;
     }
 
@@ -37,5 +39,13 @@ public class Comment {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

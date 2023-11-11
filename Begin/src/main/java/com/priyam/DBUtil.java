@@ -521,7 +521,7 @@ public class DBUtil {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            String sql = "SELECT comments.post_id,comments.email,comments.comment FROM post, comments WHERE post.id = comments.post_id and post.id = ?";
+            String sql = "SELECT comments.* FROM post, comments WHERE post.id = comments.post_id and post.id = ?";
             con = (Connection) dataSource.getConnection();
             Connection con = dataSource.getConnection();
             if (con != null) {
@@ -529,6 +529,8 @@ public class DBUtil {
             } else {
                 System.out.println("Failed");
             }
+            System.out.println("Comment sql: " + sql);
+            
             ps = con.prepareStatement(sql);
             ps.setInt(1, postId);
 //            System.out.println(sql);
@@ -536,10 +538,11 @@ public class DBUtil {
             ArrayList<Comment> comments = new ArrayList<Comment>();
             while (rs.next()) {
                 Comment comment = new Comment();
-//                comment.setId(rs.getInt("id"));
-                comment.setPostId(rs.getString("post_id"));
+                comment.setId(rs.getInt("id"));
+                comment.setPostId(rs.getInt("post_id"));
                 comment.setEmail(rs.getString("email"));
                 comment.setComment(rs.getString("comment"));
+                comment.setTime(rs.getString("time"));
                 comments.add(comment);
             }
             return comments;
@@ -558,50 +561,6 @@ public class DBUtil {
         }
         return null;
     }
-    
-//        public static ArrayList<Post> getAllPostById(DataSource dataSource) {
-//        PreparedStatement ps = null;
-//        ResultSet rs = null;
-//        try {
-//            String sql = "SELECT * FROM `post` WHERE id";
-//            con = (Connection) dataSource.getConnection();
-//            Connection con = dataSource.getConnection();
-//            if (con != null) {
-//                System.out.println("Succeeded");
-//            } else {
-//                System.out.println("Failed");
-//            }
-//            ps = con.prepareStatement(sql);
-////            System.out.println(sql);
-//            rs = ps.executeQuery();
-//            ArrayList<Post> postLists = new ArrayList<Post>();
-//            while (rs.next()) {
-//                Post postList = new Post();
-//                postList.setId(rs.getInt("id"));
-//                postList.setEmail(rs.getString("email"));
-//                postList.setLikes(rs.getInt("likes"));
-//                postList.setMessage(rs.getString("message"));
-//                postList.setDate(new java.util.Date(rs.getDate("postdate").getTime()));
-//                postList.setTime(rs.getLong("time"));
-//                postList.setActive(rs.getBoolean("active"));
-//                postLists.add(postList);
-//            }
-//            return postLists;
-//        } catch (Exception e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                con.close();
-//                ps.close();
-//                rs.close();
-//            } catch (SQLException e) {
-//                // TODO Auto-generated catch block
-//                e.printStackTrace();
-//            }
-//        }
-//        return null;
-//    }
 
     public static ArrayList<Post> getAllPosts(DataSource dataSource, String email) {
         PreparedStatement ps = null;

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
-<%@ page import="java.io.*,com.priyam.User,com.priyam.UserDetails,java.util.Date,java.text.SimpleDateFormat,com.priyam.Post,java.util.ArrayList,com.priyam.DBUtil,jakarta.annotation.Resource,javax.sql.DataSource"%>
+<%@ page import="com.priyam.Comment,java.io.*,com.priyam.User,com.priyam.UserDetails,java.util.Date,java.text.SimpleDateFormat,com.priyam.Post,java.util.ArrayList,com.priyam.DBUtil,jakarta.annotation.Resource,javax.sql.DataSource"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -267,6 +267,7 @@
     ArrayList<Post> posts=DBUtil.getUserPosts(dataSource, profile.getEmail());
     for(int i=0;i<posts.size();i++){
             Post curpost=posts.get(i);
+            ArrayList<Comment> comments=DBUtil.getAllComments(dataSource, curpost.getId());
             User curuser=DBUtil.getUserDetails(dataSource, curpost.getEmail());
             boolean isLiked=DBUtil.isLiked(dataSource, curpost.getId(), user.getEmail());
             String format=new SimpleDateFormat("dd-MM-yyyy").format(curpost.getDate());
@@ -307,7 +308,19 @@
                         <input type="hidden" name="likes" value=<%= curpost.getLikes() %> />
                         <input type="hidden" name="active" value=<%= curpost.isActive() %> />
                         <h6><button style="border-radius: 50px;" type="submit" name="service" value="<%= liking %>" class="btn btn-primary"><%= liking %>  <i class="fas fa-thumbs-up"></i></button>
-                            <span style="border-radius: 50px;" class="badge badge-dark btn " data-toggle="modal" data-target=<%= "#postLikes"+i %> > <%=curpost.getLikes()%> likes </span></h6>
+                            <span style="border-radius: 50px;" class="badge badge-dark btn " data-toggle="modal" data-target=<%= "#postLikes"+i %> > <%=curpost.getLikes()%> likes </span>
+                        </h6>
+                        <div class="formComment" style="background-color: darkgray;width: 85em;height: 5em;overflow: auto;">
+                            <div class="formCm" style="background-color: darkseagreen;border: 2px solid darkslategray;padding: 0.5em;margin-bottom: 5px;">
+                                <div class="formPicProfile">
+                                    <h6 style="color: chocolate;">ABC</h6>
+                                </div>
+                                <div class="Comments">
+                                    <p>HELLO AE</p>
+                                </div>
+                            </div>
+                            
+                        </div>
                     </form>
                 </div>
                 <%

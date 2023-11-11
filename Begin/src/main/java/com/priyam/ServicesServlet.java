@@ -81,12 +81,18 @@ public class ServicesServlet extends HttpServlet {
 
             }
         }else if (request.getParameter("service").equals("Comments")) {
+            LocalDateTime currentDateTime = LocalDateTime.now();
+            // Định dạng thời gian theo "HH:mm:ss"
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            // Chuyển đổi thành chuỗi theo định dạng "HH:mm:ss"
+            String formattedTime = currentDateTime.format(formatter);
             ArrayList values = new ArrayList();
             User user = (User) request.getSession().getAttribute("user");
             values.add(1);
             values.add(request.getParameter("dest"));
             values.add(user.getEmail());
             values.add(request.getParameter("comment"));
+            values.add(formattedTime);
             if (DBUtil.insertRow(dataSource, "comments", values, 1)) {
                 if (request.getParameter("page").equals("home")) {
                     response.sendRedirect("home.jsp");

@@ -50,28 +50,28 @@
             }
             /* Set a style for all buttons */
             button {
-              background-color: #04AA6D;
-              color: white;
-              padding: 14px 20px;
-              margin: 8px 0;
-              border: none;
-              cursor: pointer;
-              width: 100%;
+                background-color: #04AA6D;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                cursor: pointer;
+                width: 100%;
             }
 
             button:hover {
-              opacity: 0.8;
-              border-radius: 50px;
-              cursor: pointer;
+                opacity: 0.8;
+                border-radius: 50px;
+                cursor: pointer;
             }
             /* Full-width input fields */
             input[type=text], input[type=password] {
-              width: 100%;
-              padding: 12px 20px;
-              margin: 8px 0;
-              display: inline-block;
-              border: 1px solid #ccc;
-              box-sizing: border-box;
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                box-sizing: border-box;
             }
             scroll {
                 height: 50px;
@@ -176,13 +176,15 @@
             <div class="scrolling" >
                 <%                
                 ArrayList<Post> posts=DBUtil.getAllPosts(dataSource, user.getEmail());
-               ArrayList<Comment> commentList = new ArrayList<Comment>();
+               
 //                ArrayList<Post> postid=DBUtil.getAllPostById(dataSource); 
                 if(posts!=null){
                 for(int i=0;i<posts.size();i++){
                         Post curpost=posts.get(i);
-                        
+                        System.out.println("Post ID: "+curpost.getId());
+                        ArrayList<Comment> commentList = new ArrayList<Comment>();
                         ArrayList<Comment> comments=DBUtil.getAllComments(dataSource, curpost.getId());
+                        int totalComments = comments.size();
                         User curuser=DBUtil.getUserDetails(dataSource, curpost.getEmail());
                         boolean isLiked=DBUtil.isLiked(dataSource, curpost.getId(), user.getEmail());
                         String format=new SimpleDateFormat("dd-MM-yyyy").format(curpost.getDate());
@@ -243,14 +245,14 @@
                                     <input type="hidden" name="likes" value=<%= curpost.getLikes() %> />
                                     <input type="hidden" name="active" value=<%= curpost.isActive() %> />
                                     <h6 style="display:flex"><button style="border-radius: 50px;" type="submit" name="service" value="<%= liking %>" class="btn btn-primary"><%= liking %>  <i class="fas fa-thumbs-up"></i></button>
-                                    <span style="border-radius: 50px;line-height: 40px;cursor: pointer;" class="badge badge-dark btn " data-toggle="modal" data-target=<%= "#postLikes"+i %> > <%=curpost.getLikes()%> likes </span></h6>
+                                        <span style="border-radius: 50px;line-height: 40px;cursor: pointer;" class="badge badge-dark btn " data-toggle="modal" data-target=<%= "#postLikes"+i %> > <%=curpost.getLikes()%> likes </span></h6>
                                     <div style="display:flex;" class="enterComment">
                                         <input type="hidden" name="dest" value=<%= curpost.getId() %> >
                                         <input  type="text" name="comment" placeholder="Please enter your comments"> 
                                         <button style="flex:1;" type="submit" name="service" value="Comments" class="btn">Submit</button>
                                     </div>
-                                    <button style="font-size: 15px;" type="button" class="btn btn-primary badge badge-dark btn" data-toggle="modal" data-target="#staticBackdrop"><span style="border-radius: 50px;" class="badge badge-dark btn " data-toggle="modal" data-target=<%= "#postLikes"+i %> > <%=curpost.getLikes()%> </span>Comments</button>
-                                    
+                                    <button style="font-size: 15px;" type="button" class="btn btn-primary badge badge-dark btn" data-toggle="modal" data-target=<%= "#staticBackdrop"+i %>><span style="border-radius: 50px;" class="badge badge-dark btn " data-toggle="modal" data-target=<%= "#totalComments" %> > <%=totalComments%> </span>Comments</button>
+
                                 </form>
                             </div>
                             <%
@@ -270,55 +272,69 @@
 
                         </div>
                     </div></div>
-                    <!-- Modal Comment-->
-                <div class="modal fade" id="staticBackdrop" style="opacity: 1.0;">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Comments</h1>
-                        <button style="width: 10%;" type="button" class="close" data-dismiss="modal" >&times;</button>
-                      </div>
-                        <div style="overflow: auto;" class="modal-body scroll">
-                            <%
-                                    if (comments != null && !comments.isEmpty()) {
-                                        for(int c=0;c<comments.size();c++){
-                                            Comment cm=comments.get(c);
-                                            commentList.add(cm);
-                                          }
-                                    } else {
-                                            Comment emptyComment = new Comment();
-//                                            emptyComment.setPostId("");
-                                            emptyComment.setEmail("");
-                                            emptyComment.setComment("No Comments");
-                                            commentList.add(emptyComment);
-                                    }
-//                                    Comment comment : commentList
-                                    for (Comment comment : commentList) {
-                                        if(!"No Comments".equals(comment.getComment())) {
-                                        
-                            %>
-                             
-                                        <p><%= comment.getEmail() %></p>
-                                        <p><%= comment.getComment() %></p>                              
-                            
+                <!-- Modal Comment-->
+                <div class="modal fade" id=<%= "staticBackdrop"+i %> style="opacity: 1.0;">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Comments</h1>
+                                <button style="width: 10%;" type="button" class="close" data-dismiss="modal" >&times;</button>
+                            </div>
+                            <div class="modal-body">
                                 <%
-                                        } else {
+                                       int commentCount = 0;
+                                       if (comments != null && !comments.isEmpty()) {
+                                           System.out.println("Comments size 286 :   " +comments.size());
+                                           for(int c=0;c<comments.size();c++){
+                                               Comment cm=comments.get(c);
+                                               commentList.add(cm);
+                                             }
+                                       } else {
+                                               Comment emptyComment = new Comment();
+   //                                            emptyComment.setPostId("");
+                                               emptyComment.setComment("No Comments");
+                                               commentList.add(emptyComment);
+                                       }
                                 %>
+                                <div class="formComment" style="background-color: darkgray;width: 29.5em;height:9.5em;overflow: auto;">
+                                    <div class="formCm" style="background-color: darkseagreen;border: 2px solid darkslategray;padding: 0.5em;margin-bottom: 5px;">
+                                        <%  
+                                            System.out.println("Commentlist: "+commentList);
+                                                    if(commentList!=null) {
+                                                    for (Comment comment : commentList) {
+                                                        String commentValue = comment.getComment();
+                                                                System.out.println("ToTal Comments " +totalComments);
+                                                                System.out.println("CM Email "+comment.getEmail());
+                                                                System.out.println("Comment Value "+commentValue);
+                                                                System.out.println("Post id of Comments: "+comment.getPostId());
+                                                        
                                 
-                                        <i><%= comment.getComment() %></i>
-                                        
-                            <%
+                                        %>
+
+                                        <div class="formPicProfile">
+                                            <h6 style="color: chocolate;">Email: </h6><i><%= comment.getEmail() %></i>
+                                        </div>
+                                        <div class="Comments">
+                                            <p><%= comment.getComment() %></p>
+                                        </div>
+                                        <div class="Comments">
+                                            <p>Time: <%= comment.getTime() %></p>
+                                        </div>
+
+                                        <%
+                                            }
                                         }
-                                }
-                            %>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-primary close" data-dismiss="modal">Close</button>
-                      </div>
+                                        %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary close" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-                    
+
                 <div class="modal fade" id=<%= "postLikes"+i %> style="opacity: 1.0;" >
                     <div class="modal-dialog">
                         <div class="modal-content">
