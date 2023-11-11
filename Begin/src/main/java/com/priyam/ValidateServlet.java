@@ -28,8 +28,8 @@ import javax.sql.DataSource;
 public class ValidateServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static String usermail = "********";
-    private static String pass = "********";
+//    private static String usermail = "********";
+//    private static String pass = "********";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -86,11 +86,10 @@ public class ValidateServlet extends HttpServlet {
                     postValues.add(new java.util.Date());
                     postValues.add((Long) System.currentTimeMillis() / 1000);
                     postValues.add(true);
-                    
-                    if (DBUtil.insertRow((javax.sql.DataSource) dataSource, "user", values, 0) && 
-                        DBUtil.insertRow((javax.sql.DataSource) dataSource, "user_details", values1, 0) &&
-                        DBUtil.insertRow(dataSource, "post", postValues, 1) 
-                        ) {
+
+                    if (DBUtil.insertRow((javax.sql.DataSource) dataSource, "user", values, 0)
+                            && DBUtil.insertRow((javax.sql.DataSource) dataSource, "user_details", values1, 0)
+                            && DBUtil.insertRow(dataSource, "post", postValues, 1)) {
                         response.sendRedirect("home.jsp");
                     } else {
                         DBUtil.deleteUser((javax.sql.DataSource) dataSource, request.getParameter("email"));
@@ -112,14 +111,14 @@ public class ValidateServlet extends HttpServlet {
             User user = DBUtil.getUserLogin((javax.sql.DataSource) dataSource, request.getParameter("email"), request.getParameter("password"));
             if (user != null) {
                 String otp = generateOTP();
-                System.out.println(otp);
+                System.out.println("OTP:" + otp);
                 HttpSession session = request.getSession();
                 session.setAttribute("verification", "n");
                 session.setAttribute("otp", otp);
                 session.setAttribute("user", user);
                 request.setAttribute("page", "login");
                 request.getRequestDispatcher("verify.jsp").forward(request, response);
-//                send(usermail, pass, request.getParameter("email"), "User Verification for PBook", "Hi, your OTP is " + otp + ".");
+//                send(usermail, pass, request.getParameter("email"), "Email verification", "Hi, your OTP is " + otp + ".");
             } else {
                 request.setAttribute("warning", "Invalid details. Please try again.");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -133,46 +132,13 @@ public class ValidateServlet extends HttpServlet {
             session.setAttribute("user", user);
             session.setAttribute("pass", request.getParameter("password"));
             String otp = generateOTP();
-            System.out.println(otp);
+            System.out.println("OTP:" + otp);
             session.setAttribute("verification", "n");
             session.setAttribute("otp", otp);
             request.setAttribute("page", "registration");
             request.getRequestDispatcher("verify.jsp").forward(request, response);
 //            send(usermail, pass, request.getParameter("email"), "User Verification for PBook", "Hi, your OTP is " + otp + ".");
         }
-    }
-
-    public static void send(String from, String password, String to, String sub, String msg) {
-        //Get properties object    
-        Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.socketFactory.port", "465");
-        props.put("mail.smtp.socketFactory.class",
-                "javax.net.ssl.SSLSocketFactory");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.port", "587");
-        //get Session   
-//        Session session = Session.getDefaultInstance(props,null);  
-        Session session = Session.getDefaultInstance(props,
-                new jakarta.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(from, password);
-            }
-        });
-        //compose message    
-        try {
-            MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(from));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.setSubject(sub);
-            message.setText(msg);
-            //send message  
-            Transport.send(message);
-            System.out.println("message sent successfully");
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
-
     }
 
     static String generateOTP() {
@@ -192,5 +158,36 @@ public class ValidateServlet extends HttpServlet {
         }
         return String.valueOf(otp);
     }
-
+//    public static void send(String from, String password, String to, String sub, String msg) {
+//        //Get properties object    
+//        Properties props = new Properties();
+//        props.put("mail.smtp.host", "smtp.gmail.com");
+//        props.put("mail.smtp.socketFactory.port", "465");
+//        props.put("mail.smtp.socketFactory.class",
+//                "javax.net.ssl.SSLSocketFactory");
+//        props.put("mail.smtp.auth", "true");
+//        props.put("mail.smtp.port", "587");
+//        // get Session   
+//        Session session = Session.getDefaultInstance(props,null);  
+//        Session session = Session.getDefaultInstance(props,
+//                new jakarta.mail.Authenticator() {
+//            protected PasswordAuthentication getPasswordAuthentication() {
+//                return new PasswordAuthentication(from, password);
+//            }
+//        });
+//        // compose message    
+//        try {
+//            MimeMessage message = new MimeMessage(session);
+//            message.setFrom(new InternetAddress(from));
+//            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+//            message.setSubject(sub);
+//            message.setText(msg);
+//            //send message  
+//            Transport.send(message);
+//            System.out.println("message sent successfully");
+//        } catch (MessagingException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//    }
 }
