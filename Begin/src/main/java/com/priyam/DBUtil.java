@@ -35,7 +35,7 @@ public class DBUtil {
         PreparedStatement ps = null;
         try {
             int noOfCols = values.size();
-            System.out.println(noOfCols);
+//            System.out.println(noOfCols);
             String sql = "insert into " + tablename + " values (";
             for (int i = 0; i < noOfCols; i++) {
                 sql += "?";

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/Begin">
+<Context path="/SGUSocial">
     <Resource name="jdbc/sgusocial" 
               auth="Container" type="javax.sql.DataSource"
               maxActive="100" maxIdle="50" maxWait="10000"

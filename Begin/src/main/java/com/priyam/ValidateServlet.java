@@ -15,6 +15,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import java.util.Properties;
@@ -77,20 +79,25 @@ public class ValidateServlet extends HttpServlet {
                     values1.add(null);
                     values1.add(null);
                     session.removeAttribute("pass");
+
                     // Add a first post
+                    LocalDateTime currentDateTime = LocalDateTime.now();
+                    // Định dạng thời gian theo "HH:mm:ss"
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+                    // Chuyển đổi thành chuỗi theo định dạng "HH:mm:ss"
+                    String formattedTime = currentDateTime.format(formatter);
                     ArrayList postValues = new ArrayList();
                     postValues.add(1);
                     postValues.add(user.getEmail());
                     postValues.add(0);
                     postValues.add("Your first post is here! This post is automatically created when you create your acount for the first time, you can delete it if you want");
                     postValues.add(new java.util.Date());
-                    postValues.add((Long) System.currentTimeMillis() / 1000);
+                    values.add(formattedTime);
                     postValues.add(true);
 
-                    if (DBUtil.insertRow(dataSource, "user", values, 0) && 
-                        DBUtil.insertRow(dataSource, "user_details", values1, 0) &&
-                        DBUtil.insertRow(dataSource, "post", postValues, 1) 
-                        ) {
+                    if (DBUtil.insertRow(dataSource, "user", values, 0)
+                            && DBUtil.insertRow(dataSource, "user_details", values1, 0)
+                            && DBUtil.insertRow(dataSource, "post", postValues, 0)) {
                         response.sendRedirect("home.jsp");
                     } else {
                         DBUtil.deleteUser((javax.sql.DataSource) dataSource, request.getParameter("email"));

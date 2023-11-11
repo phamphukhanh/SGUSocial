@@ -125,7 +125,6 @@ public class ServicesServlet extends HttpServlet {
             }
         } else if (request.getParameter("service").equals("Remove")) {
             if (DBUtil.deletePost(dataSource, Integer.parseInt(request.getParameter("id")))) {
-
                 if (request.getParameter("page").equals("profile")) {
                     response.sendRedirect("profile.jsp?email=" + request.getParameter("email"));
                 } else if (request.getParameter("page").equals("home")) {
@@ -216,4 +215,7 @@ public class ServicesServlet extends HttpServlet {
         return null;
     }
 
+    private void formatCode() {
+        
+    }
 }
