@@ -93,6 +93,7 @@ public class ServicesServlet extends HttpServlet {
             values.add(user.getEmail());
             values.add(request.getParameter("comment"));
             values.add(formattedTime);
+            values.add(new java.util.Date());
             if (DBUtil.insertRow(dataSource, "comments", values, 1)) {
                 if (request.getParameter("page").equals("home")) {
                     response.sendRedirect("home.jsp");

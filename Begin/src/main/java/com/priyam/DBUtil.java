@@ -1,13 +1,10 @@
 package com.priyam;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 
 import javax.sql.DataSource;
 
@@ -373,6 +370,47 @@ public class DBUtil {
         }
         return list;
     }
+    
+    public static ArrayList<User> getUserName(DataSource dataSource, int postID) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT user.name FROM `comments`,`user` WHERE comments.email=user.email AND post_id = ?";
+            con = (Connection) dataSource.getConnection();
+            Connection con = dataSource.getConnection();
+//            if (con != null) {
+//                System.out.println("Succeeded");
+//            } else {
+//                System.out.println("Failed");
+//            }
+//            System.out.println("Comment sql: " + sql);
+            
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, postID);
+//            System.out.println(sql);
+            rs = ps.executeQuery();
+            ArrayList<User> users = new ArrayList<User>();
+            while (rs.next()) {
+                User user = new User();
+                user.setName(rs.getString("name"));
+                users.add(user);
+            }
+            return users;
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+                ps.close();
+                rs.close();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
 
     public static User getUserDetails(DataSource dataSource, String email2) {
         PreparedStatement ps = null;
@@ -521,7 +559,7 @@ public class DBUtil {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            String sql = "SELECT comments.* FROM post, comments WHERE post.id = comments.post_id and post.id = ?";
+            String sql = "SELECT comments.*,user.name FROM post, comments,user WHERE post.id = comments.post_id and comments.email=user.email and post.id = ?";
             con = (Connection) dataSource.getConnection();
             Connection con = dataSource.getConnection();
             if (con != null) {
@@ -543,6 +581,8 @@ public class DBUtil {
                 comment.setEmail(rs.getString("email"));
                 comment.setComment(rs.getString("comment"));
                 comment.setTime(rs.getString("time"));
+                comment.setDate(rs.getDate("date"));
+                comment.setUsername(rs.getString("name"));
                 comments.add(comment);
             }
             return comments;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 11, 2023 lúc 07:49 AM
+-- Thời gian đã tạo: Th10 12, 2023 lúc 06:09 AM
 -- Phiên bản máy phục vụ: 10.4.18-MariaDB
 -- Phiên bản PHP: 8.0.3
 
@@ -59,22 +59,18 @@ CREATE TABLE `comments` (
   `post_id` int(11) NOT NULL,
   `email` varchar(50) CHARACTER SET utf8 NOT NULL,
   `comment` varchar(100) NOT NULL,
-  `time` varchar(20) NOT NULL
+  `time` varchar(20) NOT NULL,
+  `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `comments`
 --
 
-INSERT INTO `comments` (`id`, `post_id`, `email`, `comment`, `time`) VALUES
-(1, 1, 'phamphukhanh.sgu.edu@gmail.com', 'abc', '15:05:23'),
-(2, 20, 'aryan@apple.com', 'avc', '15:05:23'),
-(3, 1, 'munna@yahoo.com', 'hello', '15:05:23'),
-(6, 1, 'aryan@apple.com', 'abc', '15:05:23'),
-(7, 1, 'aryan@apple.com', 'va', '15:31:19'),
-(8, 32, 'aryan@apple.com', 'heheheheheh', '09:11:39'),
-(9, 32, 'aryan@apple.com', 'hehehehehehlkl', '09:16:08'),
-(11, 30, 'aryan@apple.com', 'va', '10:14:48');
+INSERT INTO `comments` (`id`, `post_id`, `email`, `comment`, `time`, `date`) VALUES
+(1, 1, 'manbir@google.com', 'helloo', '12:04:52', '2023-11-15'),
+(3, 1, 'aryan@apple.com', 'avc', '12:04:52', '2023-11-15'),
+(4, 1, 'aryan@apple.com', 'abc', '12:04:52', '2023-11-12');
 
 -- --------------------------------------------------------
 
@@ -289,7 +285,7 @@ ALTER TABLE `chat`
 -- AUTO_INCREMENT cho bảng `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `post`

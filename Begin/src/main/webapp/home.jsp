@@ -307,7 +307,9 @@
                                                                 System.out.println("CM Email "+comment.getEmail());
                                                                 System.out.println("Comment Value "+commentValue);
                                                                 System.out.println("Post id of Comments: "+comment.getPostId());
-                                                        
+                                                                System.out.println("Date of Comment: "+comment.getDate());
+                                                                System.out.println("Name: "+comment.getUsername());
+
                                 
                                         %>
 
@@ -319,6 +321,8 @@
                                         </div>
                                         <div class="Comments">
                                             <p>Time: <%= comment.getTime() %></p>
+                                            <p>Date: <%= comment.getDate() %></p>
+                                            <p>UserName: <%= comment.getUsername() %></p>
                                         </div>
 
                                         <%
