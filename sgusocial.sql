@@ -3,12 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
-<<<<<<< HEAD
--- Thời gian đã tạo: Th10 12, 2023 lúc 06:09 AM
-=======
--- Thời gian đã tạo: Th10 11, 2023 lúc 04:39 AM
--- Thời gian đã tạo: Th10 11, 2023 lúc 07:49 AM
->>>>>>> 25440556328deacf3288a786d84cec0d35569d3b
+-- Thời gian đã tạo: Th10 12, 2023 lúc 06:54 AM
 -- Phiên bản máy phục vụ: 10.4.18-MariaDB
 -- Phiên bản PHP: 8.0.3
 
@@ -51,7 +46,8 @@ INSERT INTO `chat` (`id`, `email1`, `email2`, `message`, `timing`) VALUES
 (31, 'aryan@apple.com', 'abc@google.com', 'how are u\r\n', '23:48:29'),
 (32, 'abc@google.com', 'srk@redchillies.com', 'hello ae', '23:48:29'),
 (33, 'aryan@apple.com', 'priyam.roy1@wipro.com', 'avb', '15:41:15'),
-(34, 'aryan@apple.com', 'sam@usfoods.com', 'cax', '10:31:21');
+(34, 'aryan@apple.com', 'sam@usfoods.com', 'cax', '10:31:21'),
+(35, 'aryan@apple.com', 'manbir@google.com', 'abc', '12:47:06');
 
 -- --------------------------------------------------------
 
@@ -75,7 +71,8 @@ CREATE TABLE `comments` (
 INSERT INTO `comments` (`id`, `post_id`, `email`, `comment`, `time`, `date`) VALUES
 (1, 1, 'manbir@google.com', 'helloo', '12:04:52', '2023-11-15'),
 (3, 1, 'aryan@apple.com', 'avc', '12:04:52', '2023-11-15'),
-(4, 1, 'aryan@apple.com', 'abc', '12:04:52', '2023-11-12');
+(4, 1, 'aryan@apple.com', 'abc', '12:04:52', '2023-11-12'),
+(5, 1, 'aryan@apple.com', 'va', '12:32:35', '2023-11-12');
 
 -- --------------------------------------------------------
 
@@ -166,7 +163,9 @@ INSERT INTO `post` (`id`, `email`, `likes`, `message`, `postdate`, `time`, `acti
 (24, 'priyam.roy1@wipro.com', 0, 'putki', '2019-06-04', '19:53:38', 1),
 (27, 'protis3@gmail.com', 0, 'hi\r\n', '2019-06-05', '19:53:38', 1),
 (30, 'aryan@apple.com', 0, 'hello ae', '2023-10-25', '19:53:38', 1),
-(32, 'aryan@apple.com', 1, 'hee', '2023-10-25', '19:58:54', 1);
+(32, 'aryan@apple.com', 1, 'hee', '2023-10-25', '19:58:54', 1),
+(33, 'aryan@apple.com', 0, 'ha', '2023-11-12', '12:35:24', 1),
+(34, 'aryan@apple.com', 0, 'vava', '2023-11-12', '12:52:50', 1);
 
 -- --------------------------------------------------------
 
@@ -284,19 +283,19 @@ ALTER TABLE `user_details`
 -- AUTO_INCREMENT cho bảng `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT cho bảng `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
