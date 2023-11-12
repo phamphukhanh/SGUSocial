@@ -357,7 +357,7 @@
 
                                             <div class="col" align="right">
                                                 <%= comment.getTime() %>                                                
-                                                <%= comment.date() %>
+                                                <%= comment.getDate() %>
 
                                             </div>
                                         </div>
