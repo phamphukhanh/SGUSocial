@@ -13,10 +13,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
         <style>
-            
-            li.nav-item {
-                padding-right: 30px;
-            }
             nav{
                 opacity: 0.85;
             }
@@ -31,7 +27,7 @@
                 margin-left: -4em;
             }
             body {
-                background-image: url("images/bg.jpg");
+                background-image: url("images/background.jpg");
                 background-size: cover;
             }
             div.card {
@@ -64,13 +60,14 @@
         <title>Profile</title>
     </head>
     <%!
-    @Resource(name="jdbc/sgusocial")
+    @Resource(name = "jdbc/sgusocial")
     private DataSource dataSource;
     %>
+    
     <%
-    User user=(User)session.getAttribute("user");
-    String ver=(String)session.getAttribute("verification");
-            if(user==null||ver==null|| (ver!=null&&!ver.equals("y"))){
+    User user = (User)session.getAttribute("user");
+    String ver = (String)session.getAttribute("verification");
+            if(user == null || ver == null || (ver != null && !ver.equals("y"))){
                     response.sendRedirect("login.jsp");
             }
             else{
@@ -82,22 +79,22 @@
         <%
         User profile = DBUtil.getUserDetails(dataSource, request.getParameter("email"));
         UserDetails details = DBUtil.getUserDetails2(dataSource, request.getParameter("email"));
-        if(details!=null){
+        if(details! = null){
                 //System.out.println(details.getProf_pic_path());
                 //System.out.println(details.getUpdate_count());
-                if (details.getProf_pic_path()==null){
+                if (details.getProf_pic_path() == null){
                         details.setProf_pic_path("images/image.png");
                 }
                 else {
-                        String path=details.getProf_pic_path();
-                        path=path.substring(path.lastIndexOf('/')+1);
-                        path=request.getServletContext().getRealPath("")+"images/"+path;
-                        File f=new File(path);
+                        String path = details.getProf_pic_path();
+                        path = path.substring(path.lastIndexOf('/')+1);
+                        path = request.getServletContext().getRealPath("")+"images/"+path;
+                        File f = new File(path);
                         if(!f.exists()){
                            details.setProf_pic_path("images/image.png");	
                         }
                 }
-                if(details.getAbout()==null){
+                if(details.getAbout() == null){
                         details.setAbout("");
                 }
         }
@@ -151,28 +148,30 @@
         </div>
     </div>
     <div class="container-fluid" style="margin-top:80px">
-        <div class="card" style="opacity:1.0;border-radius: 50px;display: flex;flex-direction: row;align-items: center;" >
+        <div class="card mx-auto" style="opacity:1.0;border-radius: 50px;display: flex;flex-direction: row;align-items: center;" >
             <div class="card-img">
-                    <img class="card-img-top" src="<%= (details != null)?details.getProf_pic_path():"images/image.png" %>" alt="Card image" style="width:100%;border-radius: 50px;" >
+                    <img class="card-img-top" src="<%= (details != null)?details.getProf_pic_path():"images/student.png" %>" alt="Card image" style="width:100%;border-radius: 50px;" >
             </div>
             <div class="card-body" style="width:100%;">
-                <div class="card-title">
-                    <h5>Name: <%= profile.getName() %></h5>
-                </div>
-                <div class="card-title">
-                    <h6><i>Email: <%= profile.getEmail() %></i></h6>
-                </div>
-                <div class="card-title">
-                    <h6><i>Short bio: <%= (details!=null)?details.getAbout():"" %></i></h6>
-                </div>
-                <div class="row" >
-                    <div class="col-sm">
-                        <a class="card-link" href=<%= "followers.jsp?email="+profile.getEmail()%> >Followers</a>
-                    </div>
-                    <div class="col-sm">
-                        <a class="card-link" href=<%= "following.jsp?email="+profile.getEmail()%> >Following</a> 
-                    </div>
-                    <% if(user!=null && user.getEmail().equals(profile.getEmail())){ 
+                <img class="card-img-top" src="<%= (details != null)?details.getProf_pic_path():"images/student.png" %>" alt="Card image" style="width:100%;border-radius: 50px;" >
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h5>Name: <%= profile.getName() %></h5>
+                        </div>
+                        <div class="card-title">
+                            <h6><i>Email: <%= profile.getEmail() %></i></h6>
+                        </div>
+                        <div class="card-title">
+                            <h6><i>Short bio: <%= (details!=null)?details.getAbout():"" %></i></h6>
+                        </div>
+                        <div class="row text-center d-flex align-items-center">
+                            <div class="col-sm">
+                                <a class="card-link" href=<%= "followers.jsp?email="+profile.getEmail()%> >Followers</a>
+                            </div>
+                            <div class="col-sm">
+                                <a class="card-link" href=<%= "following.jsp?email="+profile.getEmail()%> >Following</a> 
+                            </div>
+                    <% if(user != null && user.getEmail().equals(profile.getEmail())){ 
                     %>
                     <!-- Button to Open the Modal -->
                     <div class="col-sm">
@@ -199,7 +198,7 @@
                                         <input type="hidden" name="email" value=<%= user.getEmail() %> />
                                         Select profile photo: <input type="file" accept=".jpg, .png" name="fname" /><br><br>
                                         Your Bio: <br><br>
-                                        <textarea class="form-control" name="about" rows="5" id="comment"> <%= (details!=null)? details.getAbout():"" %></textarea><br><br>
+                                        <textarea class="form-control" name="about" rows="5" id="comment"> <%= (details != null)? details.getAbout():"" %></textarea><br><br>
                                         <button style="border-radius: 25px;" class="btn btn-primary" type="submit" name="service" value="upload" >Submit</button>  
                                     </form>  
                                 </div>
@@ -213,7 +212,7 @@
 
 
                     <%
-                    if(user!=null && !user.getEmail().equals(profile.getEmail())){
+                    if(user != null && !user.getEmail().equals(profile.getEmail())){
                             String useremail=user.getEmail();
                             if(DBUtil.isFollowing(dataSource, user.getEmail(), profile.getEmail())){
                     %>
@@ -263,20 +262,20 @@
 <h4 class="text-white collup" >Posts :</h4>
 <div class="container-fluid collup scrolling">
     <%
-    if(user!=null){
-    ArrayList<Post> posts=DBUtil.getUserPosts(dataSource, profile.getEmail());
-    for(int i=0;i<posts.size();i++){
-            Post curpost=posts.get(i);
+    if(user != null){
+    ArrayList<Post> posts = DBUtil.getUserPosts(dataSource, profile.getEmail());
+    for(int i = 0; i < posts.size(); i++){
+            Post curpost = posts.get(i);
             ArrayList<Comment> commentList = new ArrayList<Comment>();
-            ArrayList<Comment> comments=DBUtil.getAllComments(dataSource, curpost.getId());
+            ArrayList<Comment> comments = DBUtil.getAllComments(dataSource, curpost.getId());
             int totalComments = comments.size();
-            User curuser=DBUtil.getUserDetails(dataSource, curpost.getEmail());
-            boolean isLiked=DBUtil.isLiked(dataSource, curpost.getId(), user.getEmail());
-            String format=new SimpleDateFormat("dd-MM-yyyy").format(curpost.getDate());
-            String liking=(isLiked)?"Unlike":"Like";
-            ArrayList<String> likers=curpost.getLikers();
-            ArrayList<User> users=new ArrayList<User>();
-            ArrayList<UserDetails> usersdetails=new ArrayList<UserDetails>();
+            User curuser = DBUtil.getUserDetails(dataSource, curpost.getEmail());
+            boolean isLiked = DBUtil.isLiked(dataSource, curpost.getId(), user.getEmail());
+            String format = new SimpleDateFormat("dd-MM-yyyy").format(curpost.getDate());
+            String liking = (isLiked)?"Unlike":"Like";
+            ArrayList<String> likers = curpost.getLikers();
+            ArrayList<User> users = new ArrayList<User>();
+            ArrayList<UserDetails> usersdetails = new ArrayList<UserDetails>();
             for(String u: likers){
                     users.add(DBUtil.getUserDetails(dataSource, u));
                     usersdetails.add(DBUtil.getUserDetails2(dataSource, u));
@@ -286,7 +285,7 @@
         <div class="card-header">
             <div class="row" >
                 <div class="col-sm-1" align="left">
-                    <img src= <%= (details!=null)?details.getProf_pic_path():"images/image.png" %> class="rounded-circle" alt="Profile pic" width="25" height="25" >
+                    <img src= <%= (details != null)?details.getProf_pic_path():"images/image.png" %> class="rounded-circle" alt="Profile pic" width="25" height="25" >
                 </div>
                 <div class="col-sm-2" align="left">
                     <h6><a href= <%= "profile.jsp?email="+curuser.getEmail() %> > <%= curuser.getName() %></a></h6>
@@ -318,8 +317,8 @@
                                        int commentCount = 0;
                                        if (comments != null && !comments.isEmpty()) {
                                            System.out.println("Comments size 286 :   " +comments.size());
-                                           for(int c=0;c<comments.size();c++){
-                                               Comment cm=comments.get(c);
+                                           for(int c = 0;c<comments.size();c++){
+                                               Comment cm = comments.get(c);
                                                commentList.add(cm);
                                              }
                                        } else {
@@ -328,7 +327,7 @@
                                                emptyComment.setComment("No Comments");
                                                commentList.add(emptyComment);
                                        }
-                                       if(commentList!=null) {
+                                       if(commentList != null) {
                                                 for (Comment comment : commentList) {
                                 %>
                                 <div class="formPicProfile">
@@ -379,9 +378,9 @@
                 <!-- Modal body -->
                 <div class="modal-body scrolling">
                     <%
-          for(int index=0;index<users.size();index++){%>
+          for(int index = 0; index < users.size(); index++){%>
                     <a style="border-radius: 50px;" class="list-group-item list-group-item-action" href= <%= "profile.jsp?email="+users.get(index).getEmail() %> >
-                        <img src= <%= (usersdetails.get(index).getProf_pic_path()!=null)?usersdetails.get(index).getProf_pic_path():"images/image.png" %> class="rounded-circle" alt="Profile pic" width="25" height="25" >
+                        <img src= <%= (usersdetails.get(index).getProf_pic_path() != null)?usersdetails.get(index).getProf_pic_path():"images/image.png" %> class="rounded-circle" alt="Profile pic" width="25" height="25" >
                         <%=users.get(index).getName() %>
                     </a>
                     <%}

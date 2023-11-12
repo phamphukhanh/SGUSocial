@@ -80,7 +80,7 @@ public class ServicesServlet extends HttpServlet {
                 }
 
             }
-        }else if (request.getParameter("service").equals("Comments")) {
+        } else if (request.getParameter("service").equals("Comments")) {
             LocalDateTime currentDateTime = LocalDateTime.now();
             // Định dạng thời gian theo "HH:mm:ss"
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -99,8 +99,9 @@ public class ServicesServlet extends HttpServlet {
                     response.sendRedirect("home.jsp");
                 } else if (request.getParameter("page").equals("profile")) {
                     response.sendRedirect("profile.jsp?email=" + user.getEmail());
-                }}
-    } else if (request.getParameter("service").equals("Like")) {
+                }
+            }
+        } else if (request.getParameter("service").equals("Like")) {
             User user = (User) request.getSession().getAttribute("user");
             ArrayList values = new ArrayList();
             values.add(Integer.parseInt(request.getParameter("id")));
@@ -125,7 +126,6 @@ public class ServicesServlet extends HttpServlet {
             }
         } else if (request.getParameter("service").equals("Remove")) {
             if (DBUtil.deletePost(dataSource, Integer.parseInt(request.getParameter("id")))) {
-
                 if (request.getParameter("page").equals("profile")) {
                     response.sendRedirect("profile.jsp?email=" + request.getParameter("email"));
                 } else if (request.getParameter("page").equals("home")) {
@@ -216,4 +216,7 @@ public class ServicesServlet extends HttpServlet {
         return null;
     }
 
+    private void formatCode() {
+        
+    }
 }

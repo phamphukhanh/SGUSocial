@@ -17,14 +17,8 @@
                 margin-top: 40px;
             }
             body {
-                background-image: url("images/bg.jpg");
+                background-image: url("images/background.jpg");
                 background-size: cover;
-            }
-            div.card {
-                opacity: 0.75;
-            }
-            div.card:hover{
-                opacity: 1.0;
             }
         </style>
         <title>Login</title>
@@ -35,20 +29,20 @@
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         %>
         <%
-        User user=(User)session.getAttribute("user");
-        String ver=(String)session.getAttribute("verification");
-                if(user!=null &&ver!=null&&ver.equals("y")){
+        User user = (User)session.getAttribute("user");
+        String ver = (String)session.getAttribute("verification");
+                if(user != null &&ver != null&&ver.equals("y")){
                         request.getRequestDispatcher("home.jsp").forward(request, response);
                 }
-                String warning=(String)request.getAttribute("warning");
+                String warning = (String)request.getAttribute("warning");
 	
         %>
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
                     <div id="outer" class="card collup" >
-                        <h5 class="text-danger" ><%= (warning!=null)?warning:"" %></h5>
+                        <h5 class="text-danger" ><%= (warning != null)?warning:"" %></h5>
                         <div class="card-body">
                             <h4>Please enter your login details</h4>
                             <form action="ValidateServlet" method="post">
@@ -66,11 +60,11 @@
                                 </div>
                                 <button type="submit" name="validate" value="login" class="btn btn-primary">Submit</button>
                             </form>
-                            <h5>Not a user? <a href="register.jsp">Register here.</a></h5>
+                            <h5 class="mt-3">Not a user? <a href="register.jsp">Register here.</a></h5>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4"></div>
+                <div class="col-sm-2"></div>
             </div>
         </div>
 
