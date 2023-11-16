@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 <%@ page import="com.priyam.Comment,java.io.*,com.priyam.User,com.priyam.UserDetails,java.util.Date,java.text.SimpleDateFormat,com.priyam.Post,java.util.ArrayList,com.priyam.DBUtil,jakarta.annotation.Resource,javax.sql.DataSource"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -183,7 +183,7 @@
         <div class="row justify-content-center">
             <div class="col">
                 <div class="card mx-auto" style="opacity:1.0;width:fit-content;border-radius: 50px;" >
-                    <img class="card-img-top" src="<%= (details != null)?details.getProf_pic_path():"images/student.png" %>" alt="Card image" style="width:100%;border-radius: 50px;" >
+                    <img class="card-img-top" src="<%= (details != null)?details.getProf_pic_path():"images/student.png" %>" alt="Card image" style="margin-top: 18px; margin-left: auto; margin-right: auto; width: 300px; height:  300px; object-fit: cover; border-radius: 50px;" >
                     <div class="card-body">
                         <div class="card-title">
                             <h5>Name: <%= profile.getName() %></h5>
@@ -228,7 +228,9 @@
                                                 <input type="hidden" name="email" value=<%= user.getEmail() %> />
                                                 Select profile photo: <input type="file" accept=".jpg, .png" name="fname" /><br><br>
                                                 Your Bio: <br><br>
-                                                <textarea class="form-control" name="about" rows="5" id="comment"> <%= (details!=null)? details.getAbout():"" %></textarea><br><br>
+                                                <textarea class="form-control" name="about" rows="5" id="comment">
+                                                    <%= (details != null) ? details.getAbout() : "" %>
+                                                </textarea><br><br>
                                                 <button style="border-radius: 25px;" class="btn btn-primary" type="submit" name="service" value="upload" >Submit</button>  
                                             </form>  
                                         </div>
@@ -276,7 +278,7 @@
                     <form action="ServicesServlet">
                         <div class="form-group">
                             <h5><label for="message">Post something:</label></h5>
-                            <textarea name="message" placeholder="How you feel to day" class="form-control" rows="5" id="comment" required></textarea>
+                            <textarea name="message" placeholder="Any updates?" class="form-control" rows="5" id="comment" required></textarea>
                         </div>
                         <input type="hidden" name="page" value="profile" />
                         <button style="border-radius: 50px;" type="submit" name="service" value="Post" class="btn btn-primary">Submit</button>
@@ -303,6 +305,7 @@
                 boolean isLiked=DBUtil.isLiked(dataSource, curpost.getId(), user.getEmail());
                 String format=new SimpleDateFormat("dd-MM-yyyy").format(curpost.getDate());
                 String liking=(isLiked)?"Unlike":"Like";
+                String time = curpost.getTime();
                 ArrayList<String> likers=curpost.getLikers();
                 ArrayList<User> users=new ArrayList<User>();
                 ArrayList<UserDetails> usersdetails=new ArrayList<UserDetails>();
@@ -313,15 +316,16 @@
         %>
         <div class="card collup" style="border-radius: 30px;">
             <div class="card-header">
-                <div class="row" >
-                    <div class="col-sm-1" align="left">
+                <div class="row d-flex align-items-center justify-content-center">
+                    <div class="col-sm-1" align="center">
                         <img src= <%= (details!=null)?details.getProf_pic_path():"images/image.png" %> class="rounded-circle" alt="Profile pic" width="25" height="25" >
                     </div>
                     <div class="col-sm-2" align="left">
-                        <h6><a href= <%= "profile.jsp?email="+curuser.getEmail() %> > <%= curuser.getName() %></a></h6>
+                        <a href= <%= "profile.jsp?email="+curpost.getEmail() %> > <%= curuser.getName() %></a>
                     </div>
-                    <div class="col-sm-9" align="right" >
-                        <h6>Date: <%= format %></h6>
+                    <div class="col-sm-9" align="right">
+                        <h6>Date: <%= format%></h6>
+                        <h6>Time: <%= time%></h6>
                     </div>
                 </div>
             </div>
@@ -331,121 +335,122 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="col-sm" >
-                                <form action="ServicesServlet">
-                                    <input type="hidden" name="message" value=<%= curpost.getMessage() %> />
-                                    <input type="hidden" name="id" value=<%= curpost.getId() %> />
-                                    <input type="hidden" name="page" value="home" />
-                                    <input type="hidden" name="email" value=<%= curpost.getEmail() %> />
-                                    <input type="hidden" name="likes" value=<%= curpost.getLikes() %> />
-                                    <input type="hidden" name="active" value=<%= curpost.isActive() %> />
-                                    <h6>
-                                        <button style="border-radius: 50px;" type="submit" name="service" value="<%= liking %>" class="btn btn-primary">
-                                            <%= liking %>  
-                                            <i class="fas fa-thumbs-up"></i>
-                                        </button>
-                                        <span style="border-radius: 50px;" class="badge badge-dark btn " data-toggle="modal" data-target=<%= "#postLikes"+i %> >
-                                            <%=curpost.getLikes()%> likes
-                                        </span>
-                                    </h6>
-                                </form>
-                            </div>
-                                    <%
-                            if(user.getEmail().equals(curpost.getEmail())){
-                            %>
-                            <div class="col" align="right">
-                                <form action="ServicesServlet">
-                                    <input type="hidden" name="message" value=<%= curpost.getMessage() %> />
-                                    <input type="hidden" name="id" value=<%= curpost.getId() %> />
-                                    <input type="hidden" name="email" value=<%= curpost.getEmail() %> />
-                                    <input type="hidden" name="page" value="home" />
-                                    <button style="border-radius: 50px;" type="submit" name="service" value="Remove" class="btn btn-primary">Remove</button>
-                                </form>
-                            </div>	
-                            <%
+                        <form action="ServicesServlet">
+                            <input type="hidden" name="message" value=<%= curpost.getMessage() %> />
+                            <input type="hidden" name="id" value=<%= curpost.getId() %> />
+                            <input type="hidden" name="page" value="home" />
+                            <input type="hidden" name="email" value=<%= curpost.getEmail() %> />
+                            <input type="hidden" name="likes" value=<%= curpost.getLikes() %> />
+                            <input type="hidden" name="active" value=<%= curpost.isActive() %> />
+                            <h6>
+                                <button style="border-radius: 50px;" type="submit" name="service" value="<%= liking %>" class="btn btn-primary">
+                                    <%= liking %>  
+                                    <i class="fas fa-thumbs-up"></i>
+                                </button>
+                                <span style="border-radius: 50px;" class="badge badge-dark btn " data-toggle="modal" data-target=<%= "#postLikes"+i %> >
+                                    <%=curpost.getLikes()%> likes
+                                </span>
+                            </h6>
+                        </form>
+                    </div>
+                    <%
+            if(user.getEmail().equals(curpost.getEmail())){
+                    %>
+                    <div class="col" align="right">
+                        <form action="ServicesServlet">
+                            <input type="hidden" name="message" value=<%= curpost.getMessage() %> />
+                            <input type="hidden" name="id" value=<%= curpost.getId() %> />
+                            <input type="hidden" name="email" value=<%= curpost.getEmail() %> />
+                            <input type="hidden" name="page" value="home" />
+                            <button style="border-radius: 50px;" type="submit" name="service" value="Remove" class="btn btn-primary">Remove</button>
+                        </form>
+                    </div>	
+                    <%
                             }%>
 
-                        </div>
-                        <div class="row">
-                            <form action="ServicesServlet">
-                                <input type="hidden" name="page" value="home" />
-                                <input type="hidden" name="dest" value=<%= curpost.getId() %>>
-                                <div class="form-group d-flex">
-                                    <div class="flex-grow-1 mr-2">
-                                        <input type="text" class="form-control w-100" name="comment" placeholder="Enter your comments" required>
-                                    </div>
-
-                                    <button type="submit" name="service" value="Comments" class="btn btn-primary">Comment</button>
-
-                                    <button style="font-size: 15px;" type="button" class="btn btn-primary badge badge-dark btn ml-2" data-toggle="modal"
-                                            data-target=<%="#staticBackdrop" +i %>>
-                                        <span style="border-radius: 50px;" class="badge badge-dark btn " data-toggle="modal"
-                                              data-target=<%="#totalComments" %> > <%=totalComments%>
-                                        </span>
-                                        Comments
-                                    </button>
+                </div>
+                <div class="row">
+                    <div class="col"><form action="ServicesServlet">
+                            <input type="hidden" name="page" value="home" />
+                            <input type="hidden" name="dest" value=<%= curpost.getId() %>>
+                            <div class="form-group d-flex">
+                                <div class="flex-grow-1 mr-2">
+                                    <input type="text" class="form-control w-100" name="comment" placeholder="Enter your comments" required>
                                 </div>
-                            </form>
-                        </div>
+
+                                <button type="submit" name="service" value="Comments" class="btn btn-primary">Comment</button>
+
+                                <button style="font-size: 15px;" type="button" class="btn btn-primary badge badge-dark btn ml-2" data-toggle="modal"
+                                        data-target=<%="#staticBackdrop" +i %>>
+                                    <span style="border-radius: 50px;" class="badge badge-dark btn " data-toggle="modal"
+                                          data-target=<%="#totalComments" %> > <%=totalComments%>
+                                    </span>
+                                    Comments
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <!-- Modal Comment-->
-                <div class="modal fade" id=<%= "staticBackdrop"+i %> style="opacity: 1.0;">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title" id="staticBackdropLabel"><%=totalComments%> comment(s)</h4>
-                                <button style="width: 10%;" type="button" class="close" data-dismiss="modal" >&times;</button>
-                            </div>
-                            <div class="modal-body scrolling">
-                                <%
-                                   int commentCount = 0;
-                                   if (comments != null && !comments.isEmpty()) {
-                            //         System.out.println("Comments size 286 :   " +comments.size());
-                                       for (int c = 0; c < comments.size(); c++) {
-                                           Comment cm = comments.get(c);
-                                           commentList.add(cm);
-                                       }
-                                   } 
-                                %>
-                                <%  
+            </div>
+        </div>
+        <!-- Modal Comment-->
+        <div class="modal fade" id=<%= "staticBackdrop"+i %> style="opacity: 1.0;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="staticBackdropLabel"><%=totalComments%> comment(s)</h4>
+                        <button style="width: 10%;" type="button" class="close" data-dismiss="modal" >&times;</button>
+                    </div>
+                    <div class="modal-body scrolling">
+                        <%
+                           int commentCount = 0;
+                           if (comments != null && !comments.isEmpty()) {
+                    //         System.out.println("Comments size 286 :   " +comments.size());
+                               for (int c = 0; c < comments.size(); c++) {
+                                   Comment cm = comments.get(c);
+                                   commentList.add(cm);
+                               }
+                           } 
+                        %>
+                        <%  
 //                                    System.out.println("Commentlist: "+commentList);
-                                    if(commentList != null) {
-                                    for (Comment comment : commentList) {
+                            if(commentList != null) {
+                            for (Comment comment : commentList) {
 //                                        System.out.println("ToTal Comments " +totalComments);
 //                                        System.out.println("CM Email "+comment.getEmail());
 //                                        System.out.println("Comment Value "+commentValue);
 //                                        System.out.println("Post id of Comments: "+comment.getPostId());
-                                        String commentValue = comment.getComment();
-                                %>
-                                <div class="comment">
-                                    <div class="comment-header">
-                                        <div class="row">
-                                            <div class="col" align="left">
-                                                <a href=<%="profile.jsp?email=" + comment.getEmail() %>>
-                                                    <span style="display: block;"><%= comment.getEmail() %></span>
-                                                    <span style="display: block;"><%= comment.getUsername() %></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="col" align="right">
-                                                <span style="display: block;"><%= comment.getTime() %> </span>
-                                                <span style="display: block;"><%= comment.getDate() %></span>
-                                            </div>
-                                        </div>
+                                String commentValue = comment.getComment();
+                        %>
+                        <div class="comment">
+                            <div class="comment-header">
+                                <div class="row">
+                                    <div class="col" align="left">
+                                        <a href=<%="profile.jsp?email=" + comment.getEmail() %>>
+                                            <span style="display: block;"><%= comment.getEmail() %></span>
+                                            <span style="display: block;"><%= comment.getUsername() %></span>
+                                        </a>
                                     </div>
-                                    <div class="comment-body">
-                                        <%= comment.getComment() %>
+
+                                    <div class="col" align="right">
+                                        <span style="display: block;"><%= comment.getTime() %> </span>
+                                        <span style="display: block;"><%= comment.getDate() %></span>
                                     </div>
                                 </div>
-
-                                <%
-                                    }
-                                }
-                                %>
+                            </div>
+                            <div class="comment-body">
+                                <%= comment.getComment() %>
                             </div>
                         </div>
+
+                        <%
+                            }
+                        }
+                        %>
                     </div>
                 </div>
+            </div>
+        </div>
         <div class="modal fade" id=<%= "postLikes"+i %> style="opacity: 1.0;" >
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -459,14 +464,13 @@
                     <!-- Modal body -->
                     <div class="modal-body scrolling">
                         <%
-          for(int index=0;index<users.size();index++){%>
+                        for(int index = 0; index < users.size(); index++){%>
                         <a style="border-radius: 50px;" class="list-group-item list-group-item-action" href= <%= "profile.jsp?email="+users.get(index).getEmail() %> >
                             <img src= <%= (usersdetails.get(index).getProf_pic_path()!=null)?usersdetails.get(index).getProf_pic_path():"images/image.png" %> class="rounded-circle" alt="Profile pic" width="25" height="25" >
-                            <%=users.get(index).getName() %>
+                            <span><%=users.get(index).getName()%></span>
                         </a>
                         <%}
                         %>
-
                     </div>
 
                 </div>

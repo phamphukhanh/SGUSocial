@@ -13,12 +13,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
         <style>
-            nav{
-                opacity: 0.85;
-            }
-            nav:hover{
-                opacity: 1.0;
-            }
             .collup {
                 margin-top:20px;
             }
@@ -26,11 +20,8 @@
                 background-image: url("images/background.jpg");
                 background-size: cover;
             }
-            div.card {
-                opacity: 0.75;
-            }
             div.card:hover{
-                opacity: 1.0;
+                opacity: 0.75;
             }
             .scrolling {
                 height:500px;
@@ -169,7 +160,7 @@
                     %>
                     <a class="card-text text-white"  href= <%= "profile.jsp?email="+curuser.getEmail() %> >
                         <div class="card bg-primary" style="width:250px;border-radius: 50px;">
-                            <img class="card-img-top" src=<%= (details!=null)?details.getProf_pic_path():"images/image.png" %> alt="Card image" style="width:100%;border-radius: 50px;" >
+                            <img class="card-img-top" src=<%= (details!=null)?details.getProf_pic_path():"images/image.png" %> alt="Card image" style="width: 250px; height: 250px; object-fit: cover; border-radius: 50px;" >
                             <div class="card-body text-center">
                                 <%=curuser.getName()%>
                             </div>
@@ -177,17 +168,14 @@
                     </a>
                     <%
                     }
-            }
+                        }
                     %>
                     <%
                     }
                     %>
                 </div>
-
             </div>
         </div>
-
-
     </div>
 </body>
 </html>

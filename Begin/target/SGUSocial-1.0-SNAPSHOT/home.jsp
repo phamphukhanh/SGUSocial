@@ -149,7 +149,7 @@
                 </li>
             </ul>
         </div>  
-    </nav> 
+    </nav>
     <div class="modal fade" id="myModal" style="opacity: 1.0;" >
         <div class="modal-dialog">
             <div class="modal-content">
@@ -182,7 +182,7 @@
                         <form action="ServicesServlet">
                             <div class="form-group">
                                 <h4><label for="message">Post something:</label></h4>
-                                <textarea placeholder="How you feel today..." name="message" class="form-control" rows="5" id="comment" required></textarea>
+                                <textarea placeholder="How’s it going" name="message" class="form-control" rows="5" id="comment" required></textarea>
                             </div>
                             <input type="hidden" name="page" value="home" />
                             <button style="border-radius: 50px;" type="submit" name="service" value="Post" class="btn btn-primary">Submit</button>
@@ -240,12 +240,14 @@
                 %>
                 <div class="card collup" style="border-radius: 30px;">
                     <div class="card-header">
-                        <div class="row">
-                            <div class="col-sm-1" align="left">
-                                <img src= <%= (details!=null)?details.getProf_pic_path():"images/image.png" %> class="rounded-circle" alt="Profile pic" width="25" height="25" >
+                        <div class="row d-flex align-items-center justify-content-center">
+                            <div class="col-sm-1" align="center">
+                                <img src= <%= (details!=null)?details.getProf_pic_path():"images/image.png" %> class="rounded-circle" alt="Profile pic" width="50" height="50" >
                             </div>
                             <div class="col-sm-2" align="left">
-                                <h6><a href= <%= "profile.jsp?email="+curpost.getEmail() %> > <%= curuser.getName() %></a></h6>
+                                <a href= <%= "profile.jsp?email="+curpost.getEmail() %> >
+                                    <h5 style="display: block"><%= curuser.getName() %></h5>
+                                </a>
                             </div>
                             <div class="col-sm-9" align="right">
                                 <h6>Date: <%= format%></h6>
@@ -294,25 +296,27 @@
 
                         </div>
                         <div class="row">
-                            <form action="ServicesServlet">
-                                <input type="hidden" name="page" value="home" />
-                                <input type="hidden" name="dest" value=<%= curpost.getId() %>>
-                                <div class="form-group d-flex">
-                                    <div class="flex-grow-1 mr-2">
-                                        <input type="text" class="form-control w-100" name="comment" placeholder="Enter your comments" required>
+                            <div class="col">
+                                <form action="ServicesServlet">
+                                    <input type="hidden" name="page" value="home" />
+                                    <input type="hidden" name="dest" value=<%= curpost.getId() %>>
+                                    <div class="d-flex">
+                                        <div class="flex-grow-1 mr-2">
+                                            <input type="text" class="form-control w-100" name="comment" placeholder="Enter your comments" required>
+                                        </div>
+
+                                        <button type="submit" name="service" value="Comments" class="btn btn-primary">Comment</button>
+
+                                        <button style="font-size: 15px;" type="button" class="btn btn-primary badge badge-dark btn ml-2" data-toggle="modal"
+                                                data-target=<%="#staticBackdrop" +i %>>
+                                            <span style="border-radius: 50px;" class="badge badge-dark btn " data-toggle="modal"
+                                                  data-target=<%="#totalComments" %> > <%=totalComments%>
+                                            </span>
+                                            Comments
+                                        </button>
                                     </div>
-
-                                    <button type="submit" name="service" value="Comments" class="btn btn-primary">Comment</button>
-
-                                    <button style="font-size: 15px;" type="button" class="btn btn-primary badge badge-dark btn ml-2" data-toggle="modal"
-                                            data-target=<%="#staticBackdrop" +i %>>
-                                        <span style="border-radius: 50px;" class="badge badge-dark btn " data-toggle="modal"
-                                              data-target=<%="#totalComments" %> > <%=totalComments%>
-                                        </span>
-                                        Comments
-                                    </button>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -388,9 +392,9 @@
                             <!-- Modal body -->
                             <div class="modal-body scrolling">
                                 <%
-                                for(int index = 0; index < users.size(); index++){%>
+                                for(int index = 0;index<users.size();index++){%>
                                 <a style="border-radius: 50px;" class="list-group-item list-group-item-action" href= <%= "profile.jsp?email="+users.get(index).getEmail() %> >
-                                    <img src= <%= (usersdetails.get(index).getProf_pic_path() != null) ? usersdetails.get(index).getProf_pic_path():"images/image.png" %> class="rounded-circle" alt="Profile pic" width="25" height="25" >
+                                    <img src= <%= (usersdetails.get(index).getProf_pic_path()!=null)?usersdetails.get(index).getProf_pic_path():"images/image.png" %> class="rounded-circle" alt="Profile pic" width="25" height="25" >
                                     <%=users.get(index).getName() %>
                                 </a>
                                 <%}
