@@ -148,7 +148,7 @@
                                 if(details!=null){
                                         //System.out.println(details.getProf_pic_path());
                                         if(details.getProf_pic_path()==null){
-                                                details.setProf_pic_path("images/image.png");
+                                                details.setProf_pic_path("images/sgu.png");
                                         }
                                         else{
                                                 String path=details.getProf_pic_path();
@@ -156,14 +156,14 @@
                                                 path=request.getServletContext().getRealPath("")+"images/"+path;
                                                 File f=new File(path);
                                                 if(!f.exists()){
-                                                        details.setProf_pic_path("images/image.png");	
+                                                        details.setProf_pic_path("images/sgu.png");	
                                                 }
                                         }
                                 }
                         %>
                         <a href=<%="profile.jsp?email="+followers.get(i).getEmail()  %> >
                             <div class="card bg-primary" style="width:250px;border-radius: 50px;">
-                                <img class="card-img-top" src=<%= (details!=null)?details.getProf_pic_path():"images/image.png" %> alt="Card image" style="width:100%;border-radius: 50px;" >
+                                <img class="card-img-top" src=<%= (details!=null)?details.getProf_pic_path():"images/sgu.png" %> alt="Card image" style="width:100%;border-radius: 50px;" >
                                 <div class="card-body text-white text-center">
                                     <%=followers.get(i).getName() %> 
                                 </div>

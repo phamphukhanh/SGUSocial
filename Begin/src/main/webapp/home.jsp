@@ -24,13 +24,7 @@
                 background-image: url("images/background.jpg");
                 background-size: cover;
             }
-            nav{
-                opacity: 0.85;
-            }
-            nav:hover{
-                opacity: 1.0;
-            }
-            /* width */
+            /* width 
             ::-webkit-scrollbar {
                 width: 10px;
             }
@@ -42,6 +36,7 @@
                 border-radius: 10px;
                 -webkit-box-shadow: inset 0 0 6px grey;
             }
+            */
             /* Set a style for all buttons */
             button {
                 background-color: #04AA6D;
@@ -216,7 +211,7 @@
                         if(details != null){
                                 //System.out.println(details.getProf_pic_path());
                                 if(details.getProf_pic_path() == null){
-                                        details.setProf_pic_path("images/image.png");
+                                        details.setProf_pic_path("images/sgu.png");
                                 }
                                 else{
                                         String path = details.getProf_pic_path();
@@ -224,7 +219,7 @@
                                         path = request.getServletContext().getRealPath("")+"images/"+path;
                                         File f = new File(path);
                                         if(!f.exists()){
-                                                details.setProf_pic_path("images/image.png");	
+                                                details.setProf_pic_path("images/sgu.png");	
                                         }
                                 }
                         }
@@ -242,11 +237,11 @@
                     <div class="card-header">
                         <div class="row d-flex align-items-center justify-content-center">
                             <div class="col-sm-1" align="center">
-                                <img src= <%= (details!=null)?details.getProf_pic_path():"images/image.png" %> class="rounded-circle" alt="Profile pic" width="50" height="50" >
+                                <img src= <%= (details!=null)?details.getProf_pic_path():"images/sgu.png" %> class="rounded-circle" alt="Profile pic" width="50" height="50" >
                             </div>
                             <div class="col-sm-2" align="left">
                                 <a href= <%= "profile.jsp?email="+curpost.getEmail() %> >
-                                    <h5 style="display: block"><%= curuser.getName() %></h5>
+                                    <h5><%= curuser.getName() %></h5>
                                 </a>
                             </div>
                             <div class="col-sm-9" align="right">
@@ -394,7 +389,7 @@
                                 <%
                                 for(int index = 0;index<users.size();index++){%>
                                 <a style="border-radius: 50px;" class="list-group-item list-group-item-action" href= <%= "profile.jsp?email="+users.get(index).getEmail() %> >
-                                    <img src= <%= (usersdetails.get(index).getProf_pic_path()!=null)?usersdetails.get(index).getProf_pic_path():"images/image.png" %> class="rounded-circle" alt="Profile pic" width="25" height="25" >
+                                    <img src= <%= (usersdetails.get(index).getProf_pic_path()!=null)?usersdetails.get(index).getProf_pic_path():"images/sgu.png" %> class="rounded-circle" alt="Profile pic" width="25" height="25" >
                                     <%=users.get(index).getName() %>
                                 </a>
                                 <%}

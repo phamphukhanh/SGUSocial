@@ -137,7 +137,7 @@
                 Go back to <%= profile.getName() %>'s profile
             </a>
         </h5>
-        <div class="card" style="border-radius: 30px;">
+        <div class="card" style="border-radius: 30px; height: 455px;">
             <div class="card-header" style="opacity:0.9;">
                 <h5>Chatting with <%= profile.getName() %></h5>
             </div>
@@ -183,9 +183,9 @@
                 <div class="row">
                     <div class="col">
                         <form action="ServicesServlet" method="post">
-                            <div class="form-group d-flex">
+                            <div class="d-flex">
                                 <div class="flex-grow-1 mr-2">
-                                    <textarea style="border-radius: 25px;" name="message" class="form-control" rows="2" id="comment" placeholder="Type here..." required></textarea>
+                                    <input style="border-radius: 25px;" type="text" name="message" class="form-control" id="comment" placeholder="Type here..." required>
                                 </div>
                                 <button type="submit" name="service" value="Chat" class="btn"><i class='fas fa-location-arrow text-primary' style='font-size:36px;'></i></button>
                             </div>

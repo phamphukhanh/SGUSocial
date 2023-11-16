@@ -13,12 +13,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
         <style>
-            nav{
-                opacity: 0.85;
-            }
-            nav:hover{
-                opacity: 1.0;
-            }
             .collup {
                 margin-top:20px;
             }
@@ -26,17 +20,13 @@
                 background-image: url("images/background.jpg");
                 background-size: cover;
             }
-            div.card {
-                opacity: 0.75;
-            }
             div.card:hover{
-                opacity: 1.0;
+                opacity: 0.75;
             }
             .scrolling {
                 height:500px;
-                overflow-y: auto;
             }
-            /* width */
+            /* width
             ::-webkit-scrollbar {
                 width: 10px;
             }
@@ -48,6 +38,7 @@
                 border-radius: 10px;
                 -webkit-box-shadow: inset 0 0 6px grey;
             }
+            */
         </style>
         <title>Suggestions</title>
     </head>
@@ -133,8 +124,8 @@
 
     <div class="row">
         <div class="col-sm-8">
-            <div class="container-fluid" style="margin-top:80px">
-                <h5>People also follows:</h5>
+            <div class="container-fluid" style="margin-top:65.28px">
+                <h5 sgu.png>People also follows:</h5>
 
                 <div class="scrolling">
                     <div class="card-columns">
@@ -146,7 +137,7 @@
                         if(details!=null){
                                 //System.out.println(details.getProf_pic_path());
                                 if(details.getProf_pic_path()==null){
-                                        details.setProf_pic_path("images/student.png");
+                                        details.setProf_pic_path("images/sgu.png");
                                 }
                                 else{
                                         String path=details.getProf_pic_path();
@@ -154,14 +145,14 @@
                                         path=request.getServletContext().getRealPath("")+"images/"+path;
                                         File f=new File(path);
                                         if(!f.exists()){
-                                                details.setProf_pic_path("images/student.png");	
+                                                details.setProf_pic_path("images/sgu.png");	
                                         }
                                 }
                         }
                         %>
                         <a class="card-text text-white" href= <%= "profile.jsp?email="+sugg.getEmail() %> >
                             <div class="card bg-primary" style="width:250px;border-radius: 50px;">
-                                <img class="card-img-top" src=<%= (details!=null)?details.getProf_pic_path():"images/student.png" %> alt="Card image" style="width: 250px; height: 250px; object-fit: cover; border-radius: 50px;" >
+                                <img class="card-img-top" src=<%= (details!=null)?details.getProf_pic_path():"images/sgu.png" %> alt="Card image" style="width: 250px; height: 250px; object-fit: cover; border-radius: 50px;" >
                                 <div class="card-body text-center">
                                     <%= sugg.getName() %> 
                                 </div>

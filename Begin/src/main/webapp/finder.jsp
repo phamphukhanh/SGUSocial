@@ -27,7 +27,7 @@
                 height:500px;
                 overflow-y: auto;
             }
-            /* width */
+            /* width
             ::-webkit-scrollbar {
                 width: 10px;
             }
@@ -38,7 +38,7 @@
             ::-webkit-scrollbar-thumb {
                 border-radius: 10px;
                 -webkit-box-shadow: inset 0 0 6px grey;
-            }
+            }*/
         </style>
         <title>Finder</title>
     </head>
@@ -130,7 +130,7 @@
             </div>
             <button type="submit" name="service" value="search" class="btn btn-primary mb-2">Search</button>
         </form>
-        <h5>Results:</h5>
+        <h5 class="text-white">Results:</h5>
 
         <div class="row">
             <div class="col-sm-8 scrolling">
@@ -145,7 +145,7 @@
                                     if(details!=null){
                                             //System.out.println(details.getProf_pic_path());
                                             if(details.getProf_pic_path()==null){
-                                                    details.setProf_pic_path("images/image.png");
+                                                    details.setProf_pic_path("images/sgu.png");
                                             }
                                             else{
                                                     String path=details.getProf_pic_path();
@@ -153,14 +153,14 @@
                                                     path=request.getServletContext().getRealPath("")+"images/"+path;
                                                     File f=new File(path);
                                                     if(!f.exists()){
-                                                            details.setProf_pic_path("images/image.png");	
+                                                            details.setProf_pic_path("images/sgu.png");	
                                                     }
                                             }
                                     }
                     %>
                     <a class="card-text text-white"  href= <%= "profile.jsp?email="+curuser.getEmail() %> >
                         <div class="card bg-primary" style="width:250px;border-radius: 50px;">
-                            <img class="card-img-top" src=<%= (details!=null)?details.getProf_pic_path():"images/image.png" %> alt="Card image" style="width: 250px; height: 250px; object-fit: cover; border-radius: 50px;" >
+                            <img class="card-img-top" src=<%= (details!=null)?details.getProf_pic_path():"images/sgu.png" %> alt="Card image" style="width: 250px; height: 250px; object-fit: cover; border-radius: 50px;" >
                             <div class="card-body text-center">
                                 <%=curuser.getName()%>
                             </div>

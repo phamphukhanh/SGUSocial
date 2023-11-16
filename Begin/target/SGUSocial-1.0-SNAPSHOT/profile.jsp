@@ -13,12 +13,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
         <style>
-            nav{
-                opacity: 0.85;
-            }
-            nav:hover{
-                opacity: 1.0;
-            }
             .collup {
                 margin-top:20px;
             }
@@ -29,12 +23,6 @@
             body {
                 background-image: url("images/background.jpg");
                 background-size: cover;
-            }
-            div.card {
-                opacity: 0.85;
-            }
-            div.card:hover{
-                opacity: 1.0;
             }
             .scrolling {
                 height: fit-content;
@@ -62,7 +50,7 @@
                 border: 1px solid rgba(0,0,0,.125);
                 padding: 10px;
             }
-            /* width */
+            /* width 
             ::-webkit-scrollbar {
                 width: 10px;
             }
@@ -74,6 +62,7 @@
                 border-radius: 10px;
                 -webkit-box-shadow: inset 0 0 6px grey;
             }
+            */
         </style>
         <title>Profile</title>
     </head>
@@ -100,7 +89,7 @@
                 //System.out.println(details.getProf_pic_path());
                 //System.out.println(details.getUpdate_count());
                 if (details.getProf_pic_path()==null){
-                        details.setProf_pic_path("images/image.png");
+                        details.setProf_pic_path("images/sgu.png");
                 }
                 else {
                         String path=details.getProf_pic_path();
@@ -108,7 +97,7 @@
                         path=request.getServletContext().getRealPath("")+"images/"+path;
                         File f=new File(path);
                         if(!f.exists()){
-                           details.setProf_pic_path("images/image.png");	
+                           details.setProf_pic_path("images/sgu.png");	
                         }
                 }
                 if(details.getAbout()==null){
@@ -226,16 +215,17 @@
                                         <div class="modal-body">
                                             <form action="ServicesServlet" method="post" enctype="multipart/form-data">  
                                                 <input type="hidden" name="email" value=<%= user.getEmail() %> />
-                                                Select profile photo: <input type="file" accept=".jpg, .png" name="fname" /><br><br>
-                                                Your Bio: <br><br>
+                                                <div>
+                                                    Select new profile photo:
+                                                </div>
+                                                <input class="mt-3" type="file" accept=".jpg, .png" name="fname"/><br>
+                                                <p class="mt-3">Your Bio:</p>
                                                 <textarea class="form-control" name="about" rows="5" id="comment">
                                                     <%= (details != null) ? details.getAbout() : "" %>
-                                                </textarea><br><br>
-                                                <button style="border-radius: 25px;" class="btn btn-primary" type="submit" name="service" value="upload" >Submit</button>  
+                                                </textarea>
+                                                <button style="border-radius: 25px;" class="btn btn-primary mt-3" type="submit" name="service" value="upload" >Submit</button>  
                                             </form>  
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
@@ -258,7 +248,7 @@
                                 <a class="card-link" href=<%="ServicesServlet?service=follow&email1="+useremail+"&email2="+profile.getEmail() %> >Follow</a>
                             </div>
                             <%
-	}%>
+                            }%>
                             <div class="col-sm">
                                 <a class="card-link" href=<%= "chat.jsp?email="+profile.getEmail() %> >Message</a>
                             </div>
@@ -273,7 +263,7 @@
     </div>
     <div class="row" style="display: grid;place-items: center;">
         <div class="col-sm-6">
-            <div class="container-fluid card collup" style="opacity:0.9;border-radius: 30px;">
+            <div class="container-fluid card collup" style="border-radius: 30px;">
                 <div class="card-body">
                     <form action="ServicesServlet">
                         <div class="form-group">
@@ -318,10 +308,12 @@
             <div class="card-header">
                 <div class="row d-flex align-items-center justify-content-center">
                     <div class="col-sm-1" align="center">
-                        <img src= <%= (details!=null)?details.getProf_pic_path():"images/image.png" %> class="rounded-circle" alt="Profile pic" width="25" height="25" >
+                        <img src= <%= (details!=null)?details.getProf_pic_path():"images/sgu.png" %> class="rounded-circle" alt="Profile pic" width="25" height="25" >
                     </div>
                     <div class="col-sm-2" align="left">
-                        <a href= <%= "profile.jsp?email="+curpost.getEmail() %> > <%= curuser.getName() %></a>
+                        <a href= <%= "profile.jsp?email="+curpost.getEmail() %> >
+                            <h6><%= curuser.getName() %></h6>
+                        </a>
                     </div>
                     <div class="col-sm-9" align="right">
                         <h6>Date: <%= format%></h6>
@@ -354,7 +346,7 @@
                         </form>
                     </div>
                     <%
-            if(user.getEmail().equals(curpost.getEmail())){
+                        if(user.getEmail().equals(curpost.getEmail())){
                     %>
                     <div class="col" align="right">
                         <form action="ServicesServlet">
@@ -466,7 +458,7 @@
                         <%
                         for(int index = 0; index < users.size(); index++){%>
                         <a style="border-radius: 50px;" class="list-group-item list-group-item-action" href= <%= "profile.jsp?email="+users.get(index).getEmail() %> >
-                            <img src= <%= (usersdetails.get(index).getProf_pic_path()!=null)?usersdetails.get(index).getProf_pic_path():"images/image.png" %> class="rounded-circle" alt="Profile pic" width="25" height="25" >
+                            <img src= <%= (usersdetails.get(index).getProf_pic_path()!=null)?usersdetails.get(index).getProf_pic_path():"images/sgu.png" %> class="rounded-circle" alt="Profile pic" width="25" height="25" >
                             <span><%=users.get(index).getName()%></span>
                         </a>
                         <%}
@@ -477,7 +469,7 @@
             </div>
         </div>
         <%} }
- }%>
+        }%>
     </div>
 </body>
 </html>
