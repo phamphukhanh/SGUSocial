@@ -125,7 +125,7 @@
     <div class="row">
         <div class="col-sm-8">
             <div class="container-fluid" style="margin-top:65.28px">
-                <h5 sgu.png>People also follows:</h5>
+                <h5 class="text-white">People also follows:</h5>
 
                 <div class="scrolling">
                     <div class="card-columns">

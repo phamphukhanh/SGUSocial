@@ -271,7 +271,7 @@
                             <textarea name="message" placeholder="Any updates?" class="form-control" rows="5" id="comment" required></textarea>
                         </div>
                         <input type="hidden" name="page" value="profile" />
-                        <button style="border-radius: 50px;" type="submit" name="service" value="Post" class="btn btn-primary">Submit</button>
+                        <button style="border-radius: 50px;" type="submit" name="service" value="Post" class="btn btn-primary">Post</button>
                     </form>
                 </div>
             </div>
@@ -281,7 +281,7 @@
     <%
     }
     %>
-    <h4 class="text-white collup" >Posts :</h4>
+    <h4 class="text-white collup" >Posts:</h4>
     <div class="container-fluid collup scrolling">
         <%
         if(user!=null){

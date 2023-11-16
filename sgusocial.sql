@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2023 at 08:47 AM
+-- Generation Time: Nov 16, 2023 at 09:06 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -44,9 +44,7 @@ INSERT INTO `chat` (`id`, `email1`, `email2`, `message`, `timing`) VALUES
 (29, 'abc@google.com', 'aryan@apple.com', 'how are you today\r\n', '23:48:29'),
 (30, 'aryan@apple.com', 'abc@google.com', 'hai\r\n', '23:48:29'),
 (31, 'aryan@apple.com', 'abc@google.com', 'how are u\r\n', '23:48:29'),
-(32, 'abc@google.com', 'srk@redchillies.com', 'hello ae', '23:48:29'),
 (33, 'aryan@apple.com', 'priyam.roy1@wipro.com', 'avb', '15:41:15'),
-(35, 'abc@google.com', 'srk@redchillies.com', 'hello nha', '12:04:49'),
 (36, 'abc@google.com', 'priyam.roy1@wipro.com', 'ê', '12:06:20'),
 (37, 'abc@google.com', 'aryan@apple.com', 'ùm', '12:19:29'),
 (38, 'abc@google.com', 'aryan@apple.com', 'toi khỏe', '12:23:03'),
@@ -76,7 +74,6 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `post_id`, `email`, `comment`, `time`, `date`) VALUES
-(1, 1, 'manbir@google.com', 'helloo', '12:04:52', '2023-11-15'),
 (3, 1, 'aryan@apple.com', 'avc', '12:04:52', '2023-11-15'),
 (4, 1, 'aryan@apple.com', 'abc', '12:04:52', '2023-11-12'),
 (5, 1, 'aryan@apple.com', 'va', '12:32:35', '2023-11-12'),
@@ -102,24 +99,12 @@ CREATE TABLE `follow` (
 
 INSERT INTO `follow` (`email1`, `email2`) VALUES
 ('priyam.roy1@wipro.com', 'abc@google.com'),
-('aryan@apple.com', 'sam@usfoods.com'),
-('manbir@google.com', 'aryan@apple.com'),
-('manbir@google.com', 'priyam.roy1@wipro.com'),
-('priyam.roy1@wipro.com', 'sam@usfoods.com'),
-('manbir@google.com', 'srk@redchillies.com'),
-('priyam.roy1@wipro.com', 'srk@redchillies.com'),
-('sayantan@fb.com', 'sam@usfoods.com'),
-('sayantan@fb.com', 'srk@redchillies.com'),
 ('mili@wipro.com', 'aryan@apple.com'),
 ('mili@wipro.com', 'priyam.roy1@wipro.com'),
-('mili@wipro.com', 'srk@redchillies.com'),
-('munna@yahoo.com', 'srk@redchillies.com'),
 ('munna@yahoo.com', 'priyam.roy1@wipro.com'),
 ('priyam.roy1@wipro.com', 'mili@wipro.com'),
-('protis3@gmail.com', 'sam@usfoods.com'),
 ('abc@google.com', 'priyam.roy1@wipro.com'),
 ('aryan@apple.com', 'abc@google.com'),
-('aryan@apple.com', 'srk@redchillies.com'),
 ('abc@google.com', 'aryan@apple.com'),
 ('e@gmail.com', 'abc@google.com');
 
@@ -150,7 +135,6 @@ INSERT INTO `liked` (`id`, `email`) VALUES
 (24, 'abc@google.com'),
 (39, 'abc@google.com'),
 (1, 'e@gmail.com'),
-(40, 'e@gmail.com'),
 (42, 'e@gmail.com');
 
 -- --------------------------------------------------------
@@ -180,15 +164,14 @@ INSERT INTO `post` (`id`, `email`, `likes`, `message`, `postdate`, `time`, `acti
 (22, 'mili@wipro.com', 2, 'egegeg', '2019-05-30', '19:53:38', 1),
 (23, 'munna@yahoo.com', 0, 'Hellooooo.....', '2019-06-04', '19:53:38', 1),
 (24, 'priyam.roy1@wipro.com', 1, 'putki', '2019-06-04', '19:53:38', 1),
-(27, 'protis3@gmail.com', 0, 'hi\r\n', '2019-06-05', '19:53:38', 1),
 (30, 'aryan@apple.com', 0, 'hello ae', '2023-10-25', '19:53:38', 1),
 (32, 'aryan@apple.com', 1, 'hee', '2023-10-25', '19:58:54', 1),
 (36, 'hello@mail.com', 1, 'Your', '2023-11-12', '02:07:19', 1),
 (37, 'h@mail.com', 0, 'Your first post is here! This post is automatically created when you create your account for the first time.', '2023-11-12', '02:12:51', 1),
 (38, 'h@mail.com', 1, 'yo', '2023-11-12', '02:13:19', 1),
 (39, 'abc@google.com', 1, 'hello', '2023-11-16', '10:18:21', 1),
-(40, 'e@gmail.com', 1, 'Your', '2023-11-16', '12:41:50', 1),
-(42, 'e@gmail.com', 1, 'Good', '2023-11-16', '14:27:00', 1);
+(42, 'e@gmail.com', 1, 'Good', '2023-11-16', '14:27:00', 1),
+(43, 'e@gmail.com', 0, 'Never gonna give you up\r\nNever gonna let you down\r\nNever gonna run around and\r\nDesert you!', '2023-11-16', '14:57:26', 1);
 
 -- --------------------------------------------------------
 
@@ -213,14 +196,9 @@ INSERT INTO `user` (`email`, `name`, `password`, `active`) VALUES
 ('e@gmail.com', 'E', '123', 1),
 ('h@mail.com', 'H', '123', 1),
 ('hello@mail.com', 'Hello', '123', 1),
-('manbir@google.com', 'Manoj Kumar', 'manoj123', 1),
 ('mili@wipro.com', 'Mili', 'mili', 1),
 ('munna@yahoo.com', 'Munna', 'munna123', 1),
-('priyam.roy1@wipro.com', 'priyam', 'priyam123', 1),
-('protis3@gmail.com', 'Pratyush', 'protis3', 1),
-('sam@usfoods.com', 'Sam', 'sam123', 1),
-('sayantan@fb.com', 'Sayantan Roy', 'say123', 1),
-('srk@redchillies.com', 'SRK', 'srk123', 1);
+('priyam.roy1@wipro.com', 'priyam', 'priyam123', 1);
 
 -- --------------------------------------------------------
 
@@ -239,18 +217,14 @@ CREATE TABLE `user_details` (
 --
 
 INSERT INTO `user_details` (`email`, `about`, `path`) VALUES
-('abc@google.com', '                                                                                                                                                                                                                Hello, World!\r\n                                                \r\n                                                \r\n                                                \r\n                                                \r\n                                                \r\n                           ', '/SGUSocial/images/abc@google.com.png'),
+('abc@google.com', NULL, '/SGUSocial/images/abc@google.com.png'),
 ('aryan@apple.com', 'asd', '/SGUSocial/images/aryan@apple.com.png'),
-('e@gmail.com', '                                                                                                                                                                                                                \r\n                                                \r\n                                                \r\n                                                \r\n                                                ', '/SGUSocial/images/e@gmail.com.png'),
+('e@gmail.com', NULL, '/SGUSocial/images/e@gmail.com.png'),
 ('h@mail.com', NULL, NULL),
 ('hello@mail.com', NULL, NULL),
-('manbir@google.com', 'Hi m inevitable....', '/SGUSocial/images/manbir@google.com.jpg'),
-('mili@wipro.com', '  Hollaaaaaa....', '/SGUSocial/images/mili@wipro.com.png'),
+('mili@wipro.com', 'Hollaaaaaa....', '/SGUSocial/images/mili@wipro.com.png'),
 ('munna@yahoo.com', ' ', '/SGUSocial/images/munna@yahoo.com.jpg'),
-('priyam.roy1@wipro.com', '                             hello :) :) :) :)', '/SGUSocial/images/priyam.roy1@wipro.com.jpg'),
-('sam@usfoods.com', NULL, '/SGUSocial/images/sam@usfoods.com.jpg'),
-('sayantan@fb.com', NULL, '/SGUSocial/images/sayantan@fb.com.jpg'),
-('srk@redchillies.com', '  I feel like the king of this world......!!\r\n', '/SGUSocial/images/srk@redchillies.com.jpg');
+('priyam.roy1@wipro.com', 'hello :) :) :) :)', '/SGUSocial/images/priyam.roy1@wipro.com.jpg');
 
 --
 -- Indexes for dumped tables
@@ -324,7 +298,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- Constraints for dumped tables

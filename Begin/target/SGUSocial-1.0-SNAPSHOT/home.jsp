@@ -177,10 +177,10 @@
                         <form action="ServicesServlet">
                             <div class="form-group">
                                 <h4><label for="message">Post something:</label></h4>
-                                <textarea placeholder="How’s it going" name="message" class="form-control" rows="5" id="comment" required></textarea>
+                                <textarea placeholder="How’s it going?" name="message" class="form-control" rows="5" id="comment" required></textarea>
                             </div>
                             <input type="hidden" name="page" value="home" />
-                            <button style="border-radius: 50px;" type="submit" name="service" value="Post" class="btn btn-primary">Submit</button>
+                            <button style="border-radius: 50px;" type="submit" name="service" value="Post" class="btn btn-primary">Post</button>
                         </form>
                     </div>
                     <div class="col-sm-3"></div>
@@ -189,7 +189,7 @@
         </div>
 
         <div class="container-fluid collup" >
-            <h4 class="text-white" >Feeds :</h4>
+            <h4 class="text-white" >Feeds:</h4>
             <div class="scrolling" >
                 <%                
                 ArrayList<Post> posts = DBUtil.getAllPosts(dataSource, user.getEmail());
