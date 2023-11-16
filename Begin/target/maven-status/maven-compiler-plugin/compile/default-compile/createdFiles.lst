@@ -1,7 +1,5 @@
 com\sgusocial\ServicesServlet.class
 com\sgusocial\UserDetails.class
-com\mycompany\begin\JakartaRestConfiguration.class
-com\mycompany\begin\resources\JakartaEE10Resource.class
 com\sgusocial\User.class
 com\sgusocial\Post.class
 com\sgusocial\ChatBean.class
