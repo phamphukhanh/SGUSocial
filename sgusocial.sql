@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2023 at 08:04 AM
+-- Generation Time: Nov 16, 2023 at 08:47 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -46,17 +46,13 @@ INSERT INTO `chat` (`id`, `email1`, `email2`, `message`, `timing`) VALUES
 (31, 'aryan@apple.com', 'abc@google.com', 'how are u\r\n', '23:48:29'),
 (32, 'abc@google.com', 'srk@redchillies.com', 'hello ae', '23:48:29'),
 (33, 'aryan@apple.com', 'priyam.roy1@wipro.com', 'avb', '15:41:15'),
-(34, 'aryan@apple.com', 'sam@usfoods.com', 'cax', '10:31:21'),
 (35, 'abc@google.com', 'srk@redchillies.com', 'hello nha', '12:04:49'),
 (36, 'abc@google.com', 'priyam.roy1@wipro.com', 'ê', '12:06:20'),
 (37, 'abc@google.com', 'aryan@apple.com', 'ùm', '12:19:29'),
 (38, 'abc@google.com', 'aryan@apple.com', 'toi khỏe', '12:23:03'),
-(39, 'abc@google.com', 'priyam.roy1@wipro.com', 'ccj', '12:24:47'),
 (40, 'abc@google.com', 'aryan@apple.com', 'mệt', '12:33:41'),
 (41, 'e@gmail.com', 'abc@google.com', 'chào bạn', '13:30:42'),
 (42, 'e@gmail.com', 'abc@google.com', 'bạn có phải ngươi đăng cái tus này hong', '13:31:02'),
-(43, 'abc@google.com', 'e@gmail.com', 'đéo phải tao', '13:31:41'),
-(44, 'abc@google.com', 'e@gmail.com', 'địc mẹ mày', '13:31:51'),
 (45, 'e@gmail.com', 'abc@google.com', 'ê', '13:34:45'),
 (46, 'e@gmail.com', 'abc@google.com', 'bạn ơi', '13:34:50');
 
@@ -86,10 +82,8 @@ INSERT INTO `comments` (`id`, `post_id`, `email`, `comment`, `time`, `date`) VAL
 (5, 1, 'aryan@apple.com', 'va', '12:32:35', '2023-11-12'),
 (6, 39, 'abc@google.com', 'hi', '10:18:38', '2023-11-16'),
 (7, 39, 'abc@google.com', 'ákjd', '11:56:41', '2023-11-16'),
-(8, 39, 'abc@google.com', 'gh� v&#7853;y sao', '12:01:39', '2023-11-16'),
 (9, 39, 'abc@google.com', 'quá ghê ', '12:02:29', '2023-11-16'),
-(10, 24, 'abc@google.com', 'siêu nhân điện quang', '12:02:47', '2023-11-16'),
-(11, 30, 'abc@google.com', 'lô cc', '12:41:13', '2023-11-16');
+(10, 24, 'abc@google.com', 'siêu nhân điện quang', '12:02:47', '2023-11-16');
 
 -- --------------------------------------------------------
 
@@ -156,7 +150,8 @@ INSERT INTO `liked` (`id`, `email`) VALUES
 (24, 'abc@google.com'),
 (39, 'abc@google.com'),
 (1, 'e@gmail.com'),
-(40, 'e@gmail.com');
+(40, 'e@gmail.com'),
+(42, 'e@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -192,7 +187,8 @@ INSERT INTO `post` (`id`, `email`, `likes`, `message`, `postdate`, `time`, `acti
 (37, 'h@mail.com', 0, 'Your first post is here! This post is automatically created when you create your account for the first time.', '2023-11-12', '02:12:51', 1),
 (38, 'h@mail.com', 1, 'yo', '2023-11-12', '02:13:19', 1),
 (39, 'abc@google.com', 1, 'hello', '2023-11-16', '10:18:21', 1),
-(40, 'e@gmail.com', 1, 'Your', '2023-11-16', '12:41:50', 1);
+(40, 'e@gmail.com', 1, 'Your', '2023-11-16', '12:41:50', 1),
+(42, 'e@gmail.com', 1, 'Good', '2023-11-16', '14:27:00', 1);
 
 -- --------------------------------------------------------
 
@@ -243,18 +239,18 @@ CREATE TABLE `user_details` (
 --
 
 INSERT INTO `user_details` (`email`, `about`, `path`) VALUES
-('abc@google.com', '                                                                                                                                                            Hello, World!\r\n                                                \r\n                                                \r\n                                                \r\n                                                \r\n                                                ', '/SGUSocial/images/abc@google.com.png'),
-('aryan@apple.com', '            asd', '/PBook/images/aryan@apple.com.png'),
-('e@gmail.com', '                                                    \r\n                                                ', '/SGUSocial/images/e@gmail.com.png'),
+('abc@google.com', '                                                                                                                                                                                                                Hello, World!\r\n                                                \r\n                                                \r\n                                                \r\n                                                \r\n                                                \r\n                           ', '/SGUSocial/images/abc@google.com.png'),
+('aryan@apple.com', 'asd', '/SGUSocial/images/aryan@apple.com.png'),
+('e@gmail.com', '                                                                                                                                                                                                                \r\n                                                \r\n                                                \r\n                                                \r\n                                                ', '/SGUSocial/images/e@gmail.com.png'),
 ('h@mail.com', NULL, NULL),
 ('hello@mail.com', NULL, NULL),
-('manbir@google.com', 'Hi m inevitable....', '/PBook/images/manbir@google.com.jpg'),
-('mili@wipro.com', '  Hollaaaaaa....', '/PBook/images/mili@wipro.com.png'),
-('munna@yahoo.com', ' ', '/PBook/images/munna@yahoo.com.jpg'),
-('priyam.roy1@wipro.com', '                             hello :) :) :) :)', '/PBook/images/priyam.roy1@wipro.com.jpg'),
-('sam@usfoods.com', NULL, '/PBook/images/sam@usfoods.com.jpg'),
-('sayantan@fb.com', NULL, '/PBook/images/sayantan@fb.com.jpg'),
-('srk@redchillies.com', '  I feel like the king of this world......!!\r\n', '/PBook/images/srk@redchillies.com.jpg');
+('manbir@google.com', 'Hi m inevitable....', '/SGUSocial/images/manbir@google.com.jpg'),
+('mili@wipro.com', '  Hollaaaaaa....', '/SGUSocial/images/mili@wipro.com.png'),
+('munna@yahoo.com', ' ', '/SGUSocial/images/munna@yahoo.com.jpg'),
+('priyam.roy1@wipro.com', '                             hello :) :) :) :)', '/SGUSocial/images/priyam.roy1@wipro.com.jpg'),
+('sam@usfoods.com', NULL, '/SGUSocial/images/sam@usfoods.com.jpg'),
+('sayantan@fb.com', NULL, '/SGUSocial/images/sayantan@fb.com.jpg'),
+('srk@redchillies.com', '  I feel like the king of this world......!!\r\n', '/SGUSocial/images/srk@redchillies.com.jpg');
 
 --
 -- Indexes for dumped tables
@@ -328,7 +324,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- Constraints for dumped tables
