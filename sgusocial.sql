@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 12, 2023 lúc 06:54 AM
--- Phiên bản máy phục vụ: 10.4.18-MariaDB
--- Phiên bản PHP: 8.0.3
+-- Host: 127.0.0.1
+-- Generation Time: Nov 16, 2023 at 08:04 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `sgusocial`
+-- Database: `sgusocial`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `chat`
+-- Table structure for table `chat`
 --
 
 CREATE TABLE `chat` (
@@ -33,10 +33,10 @@ CREATE TABLE `chat` (
   `email2` varchar(50) DEFAULT NULL,
   `message` varchar(100) DEFAULT NULL,
   `timing` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `chat`
+-- Dumping data for table `chat`
 --
 
 INSERT INTO `chat` (`id`, `email1`, `email2`, `message`, `timing`) VALUES
@@ -47,46 +47,63 @@ INSERT INTO `chat` (`id`, `email1`, `email2`, `message`, `timing`) VALUES
 (32, 'abc@google.com', 'srk@redchillies.com', 'hello ae', '23:48:29'),
 (33, 'aryan@apple.com', 'priyam.roy1@wipro.com', 'avb', '15:41:15'),
 (34, 'aryan@apple.com', 'sam@usfoods.com', 'cax', '10:31:21'),
-(35, 'aryan@apple.com', 'manbir@google.com', 'abc', '12:47:06');
+(35, 'abc@google.com', 'srk@redchillies.com', 'hello nha', '12:04:49'),
+(36, 'abc@google.com', 'priyam.roy1@wipro.com', 'ê', '12:06:20'),
+(37, 'abc@google.com', 'aryan@apple.com', 'ùm', '12:19:29'),
+(38, 'abc@google.com', 'aryan@apple.com', 'toi khỏe', '12:23:03'),
+(39, 'abc@google.com', 'priyam.roy1@wipro.com', 'ccj', '12:24:47'),
+(40, 'abc@google.com', 'aryan@apple.com', 'mệt', '12:33:41'),
+(41, 'e@gmail.com', 'abc@google.com', 'chào bạn', '13:30:42'),
+(42, 'e@gmail.com', 'abc@google.com', 'bạn có phải ngươi đăng cái tus này hong', '13:31:02'),
+(43, 'abc@google.com', 'e@gmail.com', 'đéo phải tao', '13:31:41'),
+(44, 'abc@google.com', 'e@gmail.com', 'địc mẹ mày', '13:31:51'),
+(45, 'e@gmail.com', 'abc@google.com', 'ê', '13:34:45'),
+(46, 'e@gmail.com', 'abc@google.com', 'bạn ơi', '13:34:50');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `comments`
+-- Table structure for table `comments`
 --
 
 CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
-  `email` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `comment` varchar(100) NOT NULL,
   `time` varchar(20) NOT NULL,
   `date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `comments`
+-- Dumping data for table `comments`
 --
 
 INSERT INTO `comments` (`id`, `post_id`, `email`, `comment`, `time`, `date`) VALUES
 (1, 1, 'manbir@google.com', 'helloo', '12:04:52', '2023-11-15'),
 (3, 1, 'aryan@apple.com', 'avc', '12:04:52', '2023-11-15'),
 (4, 1, 'aryan@apple.com', 'abc', '12:04:52', '2023-11-12'),
-(5, 1, 'aryan@apple.com', 'va', '12:32:35', '2023-11-12');
+(5, 1, 'aryan@apple.com', 'va', '12:32:35', '2023-11-12'),
+(6, 39, 'abc@google.com', 'hi', '10:18:38', '2023-11-16'),
+(7, 39, 'abc@google.com', 'ákjd', '11:56:41', '2023-11-16'),
+(8, 39, 'abc@google.com', 'gh� v&#7853;y sao', '12:01:39', '2023-11-16'),
+(9, 39, 'abc@google.com', 'quá ghê ', '12:02:29', '2023-11-16'),
+(10, 24, 'abc@google.com', 'siêu nhân điện quang', '12:02:47', '2023-11-16'),
+(11, 30, 'abc@google.com', 'lô cc', '12:41:13', '2023-11-16');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `follow`
+-- Table structure for table `follow`
 --
 
 CREATE TABLE `follow` (
   `email1` varchar(50) DEFAULT NULL,
   `email2` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `follow`
+-- Dumping data for table `follow`
 --
 
 INSERT INTO `follow` (`email1`, `email2`) VALUES
@@ -108,69 +125,79 @@ INSERT INTO `follow` (`email1`, `email2`) VALUES
 ('protis3@gmail.com', 'sam@usfoods.com'),
 ('abc@google.com', 'priyam.roy1@wipro.com'),
 ('aryan@apple.com', 'abc@google.com'),
-('aryan@apple.com', 'srk@redchillies.com');
+('aryan@apple.com', 'srk@redchillies.com'),
+('abc@google.com', 'aryan@apple.com'),
+('e@gmail.com', 'abc@google.com');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `liked`
+-- Table structure for table `liked`
 --
 
 CREATE TABLE `liked` (
   `id` int(11) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `liked`
+-- Dumping data for table `liked`
 --
 
 INSERT INTO `liked` (`id`, `email`) VALUES
 (1, 'manbir@google.com'),
 (1, 'srk@redchillies.com'),
-(20, 'abc@google.com'),
 (20, 'mili@wipro.com'),
 (22, 'mili@wipro.com'),
 (22, 'priyam.roy1@wipro.com'),
-(32, 'aryan@apple.com');
+(32, 'aryan@apple.com'),
+(36, 'hello@mail.com'),
+(38, 'h@mail.com'),
+(24, 'abc@google.com'),
+(39, 'abc@google.com'),
+(1, 'e@gmail.com'),
+(40, 'e@gmail.com');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `post`
+-- Table structure for table `post`
 --
 
 CREATE TABLE `post` (
   `id` int(11) NOT NULL,
   `email` varchar(50) DEFAULT NULL,
   `likes` int(11) DEFAULT NULL,
-  `message` varchar(100) DEFAULT NULL,
+  `message` text DEFAULT NULL,
   `postdate` date DEFAULT NULL,
   `time` varchar(20) DEFAULT NULL,
   `active` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `post`
+-- Dumping data for table `post`
 --
 
 INSERT INTO `post` (`id`, `email`, `likes`, `message`, `postdate`, `time`, `active`) VALUES
-(1, 'abc@google.com', 2, 'hiii', '2019-04-18', '19:53:38', 1),
-(20, 'priyam.roy1@wipro.com', 2, 'hola', '2019-04-19', '19:53:38', 1),
+(1, 'abc@google.com', 3, 'hiii', '2019-04-18', '19:53:38', 1),
+(20, 'priyam.roy1@wipro.com', 1, 'hola', '2019-04-19', '19:53:38', 1),
 (21, 'mili@wipro.com', 0, 'Hi', '2019-05-30', '19:53:38', 1),
 (22, 'mili@wipro.com', 2, 'egegeg', '2019-05-30', '19:53:38', 1),
 (23, 'munna@yahoo.com', 0, 'Hellooooo.....', '2019-06-04', '19:53:38', 1),
-(24, 'priyam.roy1@wipro.com', 0, 'putki', '2019-06-04', '19:53:38', 1),
+(24, 'priyam.roy1@wipro.com', 1, 'putki', '2019-06-04', '19:53:38', 1),
 (27, 'protis3@gmail.com', 0, 'hi\r\n', '2019-06-05', '19:53:38', 1),
 (30, 'aryan@apple.com', 0, 'hello ae', '2023-10-25', '19:53:38', 1),
 (32, 'aryan@apple.com', 1, 'hee', '2023-10-25', '19:58:54', 1),
-(33, 'aryan@apple.com', 0, 'ha', '2023-11-12', '12:35:24', 1),
-(34, 'aryan@apple.com', 0, 'vava', '2023-11-12', '12:52:50', 1);
+(36, 'hello@mail.com', 1, 'Your', '2023-11-12', '02:07:19', 1),
+(37, 'h@mail.com', 0, 'Your first post is here! This post is automatically created when you create your account for the first time.', '2023-11-12', '02:12:51', 1),
+(38, 'h@mail.com', 1, 'yo', '2023-11-12', '02:13:19', 1),
+(39, 'abc@google.com', 1, 'hello', '2023-11-16', '10:18:21', 1),
+(40, 'e@gmail.com', 1, 'Your', '2023-11-16', '12:41:50', 1);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -178,19 +205,21 @@ CREATE TABLE `user` (
   `name` varchar(50) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
   `active` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`email`, `name`, `password`, `active`) VALUES
 ('abc@google.com', 'ABC', 'abc123', 1),
 ('aryan@apple.com', 'Aryan Khanna', 'aryan1', 1),
+('e@gmail.com', 'E', '123', 1),
+('h@mail.com', 'H', '123', 1),
+('hello@mail.com', 'Hello', '123', 1),
 ('manbir@google.com', 'Manoj Kumar', 'manoj123', 1),
 ('mili@wipro.com', 'Mili', 'mili', 1),
 ('munna@yahoo.com', 'Munna', 'munna123', 1),
-('phamphukhanh.sgu.edu@gmail.com', 'Ph&#7841;m Phú Khánh', 'L5B4!wFKdJzYR@a', 1),
 ('priyam.roy1@wipro.com', 'priyam', 'priyam123', 1),
 ('protis3@gmail.com', 'Pratyush', 'protis3', 1),
 ('sam@usfoods.com', 'Sam', 'sam123', 1),
@@ -200,22 +229,25 @@ INSERT INTO `user` (`email`, `name`, `password`, `active`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `user_details`
+-- Table structure for table `user_details`
 --
 
 CREATE TABLE `user_details` (
   `email` varchar(50) NOT NULL,
   `about` varchar(500) DEFAULT NULL,
   `path` varchar(500) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `user_details`
+-- Dumping data for table `user_details`
 --
 
 INSERT INTO `user_details` (`email`, `about`, `path`) VALUES
-('abc@google.com', ' HELLO', '/Begin/images/abc@google.com.png'),
+('abc@google.com', '                                                                                                                                                            Hello, World!\r\n                                                \r\n                                                \r\n                                                \r\n                                                \r\n                                                ', '/SGUSocial/images/abc@google.com.png'),
 ('aryan@apple.com', '            asd', '/PBook/images/aryan@apple.com.png'),
+('e@gmail.com', '                                                    \r\n                                                ', '/SGUSocial/images/e@gmail.com.png'),
+('h@mail.com', NULL, NULL),
+('hello@mail.com', NULL, NULL),
 ('manbir@google.com', 'Hi m inevitable....', '/PBook/images/manbir@google.com.jpg'),
 ('mili@wipro.com', '  Hollaaaaaa....', '/PBook/images/mili@wipro.com.png'),
 ('munna@yahoo.com', ' ', '/PBook/images/munna@yahoo.com.jpg'),
@@ -225,11 +257,11 @@ INSERT INTO `user_details` (`email`, `about`, `path`) VALUES
 ('srk@redchillies.com', '  I feel like the king of this world......!!\r\n', '/PBook/images/srk@redchillies.com.jpg');
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `chat`
+-- Indexes for table `chat`
 --
 ALTER TABLE `chat`
   ADD PRIMARY KEY (`id`),
@@ -237,7 +269,7 @@ ALTER TABLE `chat`
   ADD KEY `fk_email2` (`email2`);
 
 --
--- Chỉ mục cho bảng `comments`
+-- Indexes for table `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`),
@@ -245,91 +277,98 @@ ALTER TABLE `comments`
   ADD KEY `fn` (`email`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `follow`
+-- Indexes for table `follow`
 --
 ALTER TABLE `follow`
   ADD KEY `email1` (`email1`),
   ADD KEY `email2` (`email2`);
 
 --
--- Chỉ mục cho bảng `liked`
+-- Indexes for table `liked`
 --
 ALTER TABLE `liked`
   ADD KEY `id` (`id`);
 
 --
--- Chỉ mục cho bảng `post`
+-- Indexes for table `post`
 --
 ALTER TABLE `post`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_user` (`email`);
 
 --
--- Chỉ mục cho bảng `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`email`);
 
 --
--- Chỉ mục cho bảng `user_details`
+-- Indexes for table `user_details`
 --
 ALTER TABLE `user_details`
   ADD PRIMARY KEY (`email`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `chat`
+-- AUTO_INCREMENT for table `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
--- AUTO_INCREMENT cho bảng `comments`
+-- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT cho bảng `post`
+-- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `chat`
+-- Constraints for table `chat`
 --
 ALTER TABLE `chat`
-  ADD CONSTRAINT `fk_email1` FOREIGN KEY (`email1`) REFERENCES `user` (`email`),
-  ADD CONSTRAINT `fk_email2` FOREIGN KEY (`email2`) REFERENCES `user` (`email`);
+  ADD CONSTRAINT `fk_email1` FOREIGN KEY (`email1`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_email2` FOREIGN KEY (`email2`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Các ràng buộc cho bảng `comments`
+-- Constraints for table `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `fk_email` FOREIGN KEY (`email`) REFERENCES `user` (`email`),
-  ADD CONSTRAINT `fk_post` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`);
+  ADD CONSTRAINT `fk_email` FOREIGN KEY (`email`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_post` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Các ràng buộc cho bảng `follow`
+-- Constraints for table `follow`
 --
 ALTER TABLE `follow`
-  ADD CONSTRAINT `follow_ibfk_1` FOREIGN KEY (`email1`) REFERENCES `user` (`email`),
-  ADD CONSTRAINT `follow_ibfk_2` FOREIGN KEY (`email2`) REFERENCES `user` (`email`);
+  ADD CONSTRAINT `follow_ibfk_1` FOREIGN KEY (`email1`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `follow_ibfk_2` FOREIGN KEY (`email2`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Các ràng buộc cho bảng `liked`
+-- Constraints for table `liked`
 --
 ALTER TABLE `liked`
-  ADD CONSTRAINT `liked_ibfk_1` FOREIGN KEY (`id`) REFERENCES `post` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `liked_ibfk_1` FOREIGN KEY (`id`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Các ràng buộc cho bảng `user_details`
+-- Constraints for table `post`
+--
+ALTER TABLE `post`
+  ADD CONSTRAINT `FK_user` FOREIGN KEY (`email`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `user_details`
 --
 ALTER TABLE `user_details`
   ADD CONSTRAINT `fk_details` FOREIGN KEY (`email`) REFERENCES `user` (`email`) ON DELETE CASCADE;
