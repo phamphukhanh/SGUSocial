@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ page import="com.priyam.Comment,com.priyam.User,com.priyam.UserDetails,java.io.File,java.util.Date,java.text.SimpleDateFormat,com.priyam.Post,java.util.ArrayList,com.priyam.DBUtil,jakarta.annotation.Resource,javax.sql.DataSource"%>
+<%@ page import="com.sgusocial.Comment,com.sgusocial.User,com.sgusocial.UserDetails,java.io.File,java.util.Date,java.text.SimpleDateFormat,com.sgusocial.Post,java.util.ArrayList,com.sgusocial.DBUtil,jakarta.annotation.Resource,javax.sql.DataSource"%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

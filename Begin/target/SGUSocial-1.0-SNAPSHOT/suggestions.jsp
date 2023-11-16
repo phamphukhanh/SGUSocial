@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ page import="com.priyam.User,com.priyam.UserDetails,java.io.File,java.util.ArrayList,com.priyam.DBUtil,jakarta.annotation.Resource,javax.sql.DataSource"%>
+<%@ page import="com.sgusocial.User,com.sgusocial.UserDetails,java.io.File,java.util.ArrayList,com.sgusocial.DBUtil,jakarta.annotation.Resource,javax.sql.DataSource"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
