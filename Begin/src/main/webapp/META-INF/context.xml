@@ -2,7 +2,7 @@
 <Context path="/SGUSocial">
     <Resource name="jdbc/sgusocial" 
               auth="Container" type="javax.sql.DataSource"
-              maxActive="100" maxIdle="50" maxWait="10000"
+              maxTotal="100" maxIdle="50" maxWaitMillis="10000"
               username="root" password="" 
               driverClassName="com.mysql.cj.jdbc.Driver"
               url="jdbc:mysql://localhost:3306/sgusocial"/>

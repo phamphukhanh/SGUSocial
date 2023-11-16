@@ -350,15 +350,14 @@
                                         <div class="row">
                                             <div class="col" align="left">
                                                 <a href=<%="profile.jsp?email=" + comment.getEmail() %>>
-                                                    <%= comment.getEmail() %>
-                                                    <%= comment.getUsername() %>
+                                                    <span style="display: block;"><%= comment.getEmail() %></span>
+                                                    <span style="display: block;"><%= comment.getUsername() %></span>
                                                 </a>
                                             </div>
 
                                             <div class="col" align="right">
-                                                <%= comment.getTime() %>                                                
-                                                <%= comment.getDate() %>
-
+                                                <span style="display: block;"><%= comment.getTime() %> </span>
+                                                <span style="display: block;"><%= comment.getDate() %></span>
                                             </div>
                                         </div>
                                     </div>
