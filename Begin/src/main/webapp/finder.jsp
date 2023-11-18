@@ -43,21 +43,21 @@
         <title>Finder</title>
     </head>
     <%!
-    @Resource(name="jdbc/sgusocial")
-    private DataSource dataSource;
+        @Resource(name="jdbc/sgusocial")
+        private DataSource dataSource;
     %>
     <%
-    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     %>
     <%
-    User user=(User)session.getAttribute("user");
-    String ver=(String)session.getAttribute("verification");
-    String name=null;
-    if(user==null||ver==null|| (ver!=null&&!ver.equals("y"))){
-            response.sendRedirect("login.jsp");
-    }
-    else{
-            name=user.getName();	
+        User user = (User)session.getAttribute("user");
+        String ver = (String)session.getAttribute("verification");
+        String name = null;
+        if(user == null || ver == null || (ver != null && !ver.equals("y"))){
+                response.sendRedirect("login.jsp");
+        }
+        else{
+                name = user.getName();
     %>
     <body>
     <nav class="navbar navbar-dark navbar-expand-md fixed-top bg-primary">
@@ -136,27 +136,27 @@
             <div class="col-sm-8 scrolling">
                 <div class="card-columns">
                     <%
-                    ArrayList<User> profiles=null;
-                    profiles=(ArrayList<User>)request.getAttribute("users");
-                    if(profiles!=null){
-                            for(int i=0;i<profiles.size();i++){
-                                    User curuser=profiles.get(i);
-                                    UserDetails details=DBUtil.getUserDetails2(dataSource, curuser.getEmail());
-                                    if(details!=null){
-                                            //System.out.println(details.getProf_pic_path());
-                                            if(details.getProf_pic_path()==null){
-                                                    details.setProf_pic_path("images/sgu.png");
-                                            }
-                                            else{
-                                                    String path=details.getProf_pic_path();
-                                                    path=path.substring(path.lastIndexOf('/')+1);
-                                                    path=request.getServletContext().getRealPath("")+"images/"+path;
-                                                    File f=new File(path);
-                                                    if(!f.exists()){
-                                                            details.setProf_pic_path("images/sgu.png");	
-                                                    }
-                                            }
+                    ArrayList<User> profiles = null;
+                    profiles = (ArrayList<User>)request.getAttribute("users");
+                    if(profiles != null){
+                            for(int i = 0; i<profiles.size(); i++){
+                                User curuser = profiles.get(i);
+                                UserDetails details = DBUtil.getUserDetails2(dataSource, curuser.getEmail());
+                                if(details != null){
+                                    //System.out.println(details.getProf_pic_path());
+                                    if(details.getProf_pic_path() == null){
+                                            details.setProf_pic_path("images/sgu.png");
                                     }
+                                    else{
+                                        String path = details.getProf_pic_path();
+                                        path = path.substring(path.lastIndexOf('/')+1);
+                                        path = request.getServletContext().getRealPath("")+"images/"+path;
+                                        File f = new File(path);
+                                        if(!f.exists()){
+                                            details.setProf_pic_path("images/sgu.png");	
+                                        }
+                                    }
+                                }
                     %>
                     <a class="card-text text-white"  href= <%= "profile.jsp?email="+curuser.getEmail() %> >
                         <div class="card bg-primary" style="width:250px;border-radius: 50px;">
@@ -167,7 +167,7 @@
                         </div>
                     </a>
                     <%
-                    }
+                            }
                         }
                     %>
                     <%
