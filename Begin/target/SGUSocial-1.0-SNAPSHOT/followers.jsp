@@ -24,7 +24,7 @@
                 margin-top:20px;
             }
             body {
-                background-image: url("images/bg.jpg");
+                background-image: url("images/background.jpg");
                 background-size: cover;
             }
             div.card {
@@ -49,9 +49,6 @@
                 border-radius: 10px;
                 -webkit-box-shadow: inset 0 0 6px grey;
             }
-            li.nav-item {
-                padding-right: 30px;
-            }
         </style>
         <title>Followers</title>
     </head>
@@ -71,26 +68,41 @@
                 }
                 else { %>
     <nav class="navbar navbar-dark navbar-expand-md fixed-top bg-primary">
-        <a style="border-radius: 25px;" class="navbar-brand bg-primary text-white" href="home.jsp">SGUSocial</a>
+        <a style="border-radius: 10px;" class="navbar-brand bg-primary text-white" href="home.jsp">SGUSocial</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a style="border-radius: 25px;" class="nav-link fas fa-home btn btn-primary" href=<%= "home.jsp?" %>> Home</a>
+                <li class="nav-item active">
+                    <a style="border-radius: 10px;" class="nav-link btn btn-primary" href=<%= "home.jsp?" %>>
+                        <i class="fas fa-home"></i>
+                        Home
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a style="border-radius: 25px;" class="nav-link fas fa-user-circle btn btn-primary" href=<%= "profile.jsp?email="+user.getEmail() %>> Profile</a>
+                    <a style="border-radius: 10px;" class="nav-link btn btn-primary" href=<%= "profile.jsp?email="+user.getEmail() %>>
+                        <i class="fas fa-user-circle"></i>
+                        Profile
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a style="border-radius: 25px;" class="nav-link fas fa-search btn btn-primary" href="finder.jsp"> Finder</a>
+                    <a style="border-radius: 10px;" class="nav-link btn btn-primary" href="finder.jsp">
+                        <i class="fas fa-search"></i>
+                        Finder
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a style="border-radius: 25px;" class="nav-link fas fa-user-friends btn btn-primary" href="suggestions.jsp"> Suggestions</a>
+                    <a style="border-radius: 10px;" class="nav-link btn btn-primary" href="suggestions.jsp">
+                        <i class="fas fa-user-friends"></i>
+                        Suggestions
+                    </a>
                 </li>    
                 <li class="nav-item">
-                    <a style="border-radius: 25px;" class="nav-link fas fa-power-off btn btn-primary" data-toggle="modal" data-target="#myModal" href="#">Logout</a>
+                    <a style="border-radius: 10px;" class="nav-link btn btn-primary" data-toggle="modal" data-target="#myModal" href="#">
+                        <i class="fas fa-power-off"></i>
+                        Logout
+                    </a>
                 </li>
             </ul>
         </div>  
@@ -129,7 +141,7 @@
         User profile=DBUtil.getUserDetails(dataSource, request.getParameter("email"));
         if(!user.getEmail().equals(profile.getEmail())){
                 %>
-                <h5><a href=<%= "profile.jsp?email="+profile.getEmail()%> >Go back to <%= profile.getName() %>'s profile</a></h5>
+                <h5><a class="text-white" href=<%= "profile.jsp?email="+profile.getEmail()%> >Go back to <%= profile.getName() %>'s profile</a></h5>
                 <%
 }%>
                 <%
@@ -139,7 +151,7 @@
                         followers.add(DBUtil.getUserDetails(dataSource, followerEmails.get(i)));
                 }%>
 
-                <button type="button" class="btn btn-outline-primary">Followers: <span class="badge badge-light"><%= followers.size() %></span></button>
+                <button type="button" class="btn btn-outline-primary text-white">Followers: <span class="badge badge-light"><%= followers.size() %></span></button>
                 <div class="scrolling">
                     <div class="card-columns collup">
                         <%

@@ -274,9 +274,9 @@ public class DBUtil {
                     + " where email1=?)"
                     + " and email2 not in(?))";
             /*
-			 * this will return people's profiles followed by people
-			 *  who also follows people whom you follow as well
-			 * */
+            * trả về tập những người theo dõi của người mà người dùng theo dõi
+            */
+            
             con = (Connection) dataSource.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, email);

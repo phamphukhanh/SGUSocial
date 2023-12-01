@@ -24,7 +24,7 @@
                 opacity: 0.75;
             }
             .scrolling {
-                height:500px;
+                height:fit-content;
             }
             /* width
             ::-webkit-scrollbar {
