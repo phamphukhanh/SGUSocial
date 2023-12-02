@@ -24,7 +24,7 @@
                 margin-top:20px;
             }
             body {
-                background-image: url("images/bg.jpg");
+                background-image: url("images/background.jpg");
                 background-size: cover;
             }
             div.card {
